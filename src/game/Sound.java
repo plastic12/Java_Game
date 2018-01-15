@@ -5,13 +5,15 @@ import java.awt.event.*;
 import java.io.*;
 public class Sound 
 {
-	public static void main(String[] args)
+	public static void main(String[] args) throws FileNotFoundException
 	{
+		FileInputStream f=new FileInputStream(new File("liquid.wav"));
 		JFrame frame = new JFrame();
 		frame.setSize(200,200);
 		JButton button = new JButton("Click me");
 		frame.add(button);
 		button.addActionListener(new AL());
+		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
 
@@ -28,11 +30,12 @@ public class Sound
 		AudioData MD;
 		ContinuousAudioDataStream loop = null;
 		try{
-			BGM = new AudioStream(new FileInputStream("C:\\test\\ha.wav"));
+			BGM = new AudioStream(new FileInputStream("liquid.wav"));
 			MD = BGM.getData();
 			loop = new ContinuousAudioDataStream(MD);
 		}catch(IOException error){
 			System.out.print("file not found");
+			System.out.println(error.getMessage());
 		}
 		MGP.start(loop);
 	}
