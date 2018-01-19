@@ -1,21 +1,33 @@
 package game;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringBinding;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class GameController 
 {
 	@FXML
-	private Label ScoreLabel;
+	private Label scoreLabel;
 	@FXML
-	private Label HealthLabel;
-
+	private Label healthLabel;
+	private Shooter shooter;
+	private SimpleIntegerProperty s;
+	private SimpleIntegerProperty h;
 	public GameController() {
 	}
-	public void setText()
+	public void init()
 	{
-		ScoreLabel.setText("Score: 0");
-		HealthLabel.setText("Health: 100");
+		shooter=new Shooter();
+		//setScore(0);
+		scoreLabel.textProperty().bind(Bindings.concat("score: ").concat(shooter.getScore().asString()));
+		healthLabel.textProperty().bind(Bindings.concat("health: ").concat(shooter.getHealth().asString()));
 	}
-
+	public void scoreInc(int increment)
+	{
+		shooter.scoreInc(increment);
+	}
+	public void healthInc(int increment) {shooter.healthInc(increment);}
 }

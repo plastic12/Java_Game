@@ -16,6 +16,7 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 public class Main extends Application {
+	public static final int FPS=50;
 	private Stage primaryStage;
 	private StackPane gamePane;
 
@@ -25,14 +26,27 @@ public class Main extends Application {
 			this.primaryStage=primaryStage;
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("Game.fxml"));
-			
+
 			gamePane=(StackPane) loader.load();
 			GameController gameController=loader.getController();
-			gameController.setText();
+			gameController.init();
+			// Create a handler for animation
+			EventHandler<ActionEvent> eventHandler = e -> {
+				gameController.scoreInc(1);
+				if(Math.random()>0.9)
+					gameController.healthInc(-1);
+			};
+
+			// Create an animation for a running clock
+
 			Scene scene=new Scene(gamePane);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("game");
-			primaryStage.show(); 
+			primaryStage.show();
+			Timeline animation = new Timeline(
+					new KeyFrame(Duration.millis(1000/FPS), eventHandler));
+			animation.setCycleCount(Timeline.INDEFINITE);
+			animation.play(); // Start animation
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -54,10 +68,10 @@ public class Main extends Application {
     // Create a scene and place it in the stage
     Scene scene = new Scene(clock, 250, 250);
 		 */
- // Set the stage title
+		// Set the stage title
 		//primaryStage.setScene(scene); // Place the scene in the stage
 		//primaryStage.setResizable(false);
-// Display the stage
+		// Display the stage
 	}
 
 	/**
