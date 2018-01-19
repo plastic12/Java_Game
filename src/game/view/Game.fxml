@@ -22,7 +22,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="600.0">
                <children>
-                  <Circle fx:id="shooterRender" fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="shooterRender" centerX="500.0" centerY="100.0" fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
                </children></AnchorPane>
         </items>
       </SplitPane>

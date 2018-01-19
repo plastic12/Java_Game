@@ -30,12 +30,6 @@ public class Main extends Application {
 			loader.setLocation(Main.class.getResource("view/Game.fxml"));
 			gamePane=(StackPane) loader.load();
 			GameController gameController=loader.getController();
-			gamePane.addEventHandler(KeyEvent.KEY_PRESSED, e->{
-				System.out.println("pressed");
-			});
-			gamePane.addEventHandler(KeyEvent.KEY_RELEASED, e->{
-				System.out.println("released");
-			});
 			
 			gameController.init();
 			// Create a handler for animation
@@ -47,6 +41,12 @@ public class Main extends Application {
 			// Create an animation for a running clock
 
 			Scene scene=new Scene(gamePane);
+			scene.addEventHandler(KeyEvent.KEY_PRESSED, e->{
+				gameController.pressHandler(e);
+			});
+			scene.addEventHandler(KeyEvent.KEY_RELEASED, e->{
+				gameController.releaseHandler(e);
+			});
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("game");
 			primaryStage.setResizable(false);

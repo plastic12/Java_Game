@@ -6,7 +6,7 @@ import javafx.scene.shape.Circle;
 
 public abstract class Entity 
 {
-	private Point p;
+	protected Point p;
 	private SimpleDoubleProperty radius;
 	protected double xVelocity;
 	protected double yVelocity;
@@ -33,7 +33,6 @@ public abstract class Entity
 	public void move()
 	{
 		p.setX(p.getX()+xVelocity/Main.FPS);
-		p.setX(p.getY()+yVelocity/Main.FPS);
+		p.setY(p.getY()+yVelocity/Main.FPS);
 	}
-
 }

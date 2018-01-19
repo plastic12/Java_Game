@@ -23,22 +23,26 @@ public class GameController
 	
 	
 	private Shooter shooter;
+	public static final double XBOUND=600;
+	public static final double YBOUND=500;
 	public GameController() {
 	}
 	public void init()
 	{	
 		shooter=new Shooter();
 		shooter.bind(shooterRender);
-		//setScore(0);
+		System.out.println(shooterRender.getCenterX()+" "+shooter.getX());
+		System.out.println(shooterRender.getCenterY()+" "+shooter.getY());
 		scoreLabel.textProperty().bind(Bindings.concat("score: ").concat(shooter.getScore().asString()));
 		healthLabel.textProperty().bind(Bindings.concat("health: ").concat(shooter.getHealth().asString()));
 	}
-	public void handler(KeyEvent e)
+	public void pressHandler(KeyEvent e)
 	{
 		switch(e.getCode())
 		{
 		case LEFT:
 			shooter.LEFT=true;
+			System.out.println("press");
 			break;
 		case RIGHT:
 			shooter.RIGHT=true;
@@ -48,6 +52,27 @@ public class GameController
 			break;
 		case UP:
 			shooter.UP=true;
+			break;
+		default:
+			break;
+		}
+	}
+	public void releaseHandler(KeyEvent e)
+	{
+		switch(e.getCode())
+		{
+		case LEFT:
+			shooter.LEFT=false;
+			System.out.println("released");
+			break;
+		case RIGHT:
+			shooter.RIGHT=false;
+			break;
+		case DOWN:
+			shooter.DOWN=false;
+			break;
+		case UP:
+			shooter.UP=false;
 			break;
 		default:
 			break;
