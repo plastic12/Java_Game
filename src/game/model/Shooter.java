@@ -1,23 +1,27 @@
-package game;
+package game.model;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.shape.Circle;
 
-public class Shooter 
+public class Shooter extends Entity
 {
 	private SimpleIntegerProperty s;
 	private SimpleIntegerProperty h;
-	private int xVelocity;
-	private int yVelocity;
-	private SimpleDoubleProperty xPos;
-	private SimpleDoubleProperty yPos;
+	public static final double INIT_X=300;
+	public static final double INIT_Y=250;
+	public static final double INIT_R=10;
 	public static final int MAX_HEALTH=100;
 	public Shooter()
 	{
+		super(INIT_X,INIT_Y,INIT_R);
 		s=new SimpleIntegerProperty(0);
 		h=new SimpleIntegerProperty(MAX_HEALTH);
+		xVelocity=0;
+		yVelocity=0;
 	}
+	
 	public void scoreInc(int increment)
 	{
 		s.set(s.get()+increment);
