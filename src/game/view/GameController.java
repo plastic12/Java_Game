@@ -42,7 +42,6 @@ public class GameController
 		{
 		case LEFT:
 			shooter.LEFT=true;
-			System.out.println("press");
 			break;
 		case RIGHT:
 			shooter.RIGHT=true;
@@ -63,7 +62,6 @@ public class GameController
 		{
 		case LEFT:
 			shooter.LEFT=false;
-			System.out.println("released");
 			break;
 		case RIGHT:
 			shooter.RIGHT=false;
