@@ -1,5 +1,6 @@
 package game.model;
 
+import game.Main;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.shape.Circle;
 
@@ -29,6 +30,10 @@ public abstract class Entity
 		c.centerYProperty().bind(p.getYProperty());
 		c.radiusProperty().bind(radius);
 	}
-	
+	public void move()
+	{
+		p.setX(p.getX()+xVelocity/Main.FPS);
+		p.setX(p.getY()+yVelocity/Main.FPS);
+	}
 
 }
