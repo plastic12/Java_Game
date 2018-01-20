@@ -35,7 +35,12 @@ public class Main extends Application {
 			//main loop
 			EventHandler<ActionEvent> eventHandler = e -> 
 			{
+				//gen enemy
+				//move
 				gameController.movePhase();
+				//check collision
+				//remove outBound object
+				gameController.removeOutBound();
 			};
 
 			Scene scene=new Scene(gamePane);
