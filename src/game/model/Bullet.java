@@ -19,7 +19,6 @@ public class Bullet
 	{
 		p1=new Point(x1,y1);
 		double distance=Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
-		//System.out.println(x1+(x2-x1)*length/distance+" "+)
 		p2=new Point(x1+(x2-x1)*length/distance,y1+(y2-y1)*length/distance);
 		render=new Line();
 		render.setLayoutX(0);

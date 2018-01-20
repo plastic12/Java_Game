@@ -3,13 +3,16 @@ package game.view;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import game.Main;
 import game.model.Bullet;
 import game.model.Enemy;
 import game.model.Shooter;
 import javafx.beans.binding.Bindings;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -26,6 +29,10 @@ public class GameController
 	private AnchorPane gamePane;
 	private LinkedList<Bullet> bullets;
 	private Shooter shooter;
+	private double mouseX=0;
+	private double mouseY=0;
+	private int shootCounter=0;
+	public static final double shootfreq=2;
 	public static final double XBOUND=600;
 	public static final double YBOUND=500;
 	public GameController() {
@@ -34,12 +41,24 @@ public class GameController
 	{	
 		bullets=new LinkedList<Bullet>();
 		shooter=new Shooter();
-		addBullet();
+		//addBullet();
 		//bind shooter
 		shooter.bind(shooterRender);
 		//bind label
 		scoreLabel.textProperty().bind(Bindings.concat("score: ").concat(shooter.getScore().asString()));
 		healthLabel.textProperty().bind(Bindings.concat("health: ").concat(shooter.getHealth().asString()));
+		//add mouse monitor
+		gamePane.setOnMouseMoved(new EventHandler<MouseEvent>()
+				{
+
+					@Override
+					public void handle(MouseEvent event) {
+						// TODO Auto-generated method stub
+						mouseX=event.getX();
+						mouseY=event.getY();
+					}
+			
+				});
 	}
 	public void pressHandler(KeyEvent e)
 	{
@@ -61,9 +80,19 @@ public class GameController
 			break;
 		}
 	}
-	public void addBullet()
+	public void genBullet()
 	{
-		Bullet b=new Bullet(shooter.getX(),shooter.getY(),shooter.getX()+100,shooter.getY()+100);
+		shootCounter++;
+		if(shootCounter>=Main.FPS/shootfreq)
+		{
+			addBullet();
+			shootCounter=0;
+		}
+		
+	}
+	private void addBullet()
+	{
+		Bullet b=new Bullet(shooter.getX(),shooter.getY(),mouseX,mouseY);
 		bullets.add(b);
 		gamePane.getChildren().add(b.getLine());
 	}
