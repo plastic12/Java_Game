@@ -32,21 +32,21 @@ public class Main extends Application {
 			GameController gameController=loader.getController();
 			
 			gameController.init();
-			// Create a handler for animation
+			//main loop
 			EventHandler<ActionEvent> eventHandler = e -> 
 			{
 				gameController.movePhase();
 			};
 
-			// Create an animation for a running clock
-
 			Scene scene=new Scene(gamePane);
+			//add event handler
 			scene.addEventHandler(KeyEvent.KEY_PRESSED, e->{
 				gameController.pressHandler(e);
 			});
 			scene.addEventHandler(KeyEvent.KEY_RELEASED, e->{
 				gameController.releaseHandler(e);
 			});
+			//render init
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("game");
 			primaryStage.setResizable(false);
@@ -54,18 +54,13 @@ public class Main extends Application {
 			Timeline animation = new Timeline(
 					new KeyFrame(Duration.millis(1000/FPS), eventHandler));
 			animation.setCycleCount(Timeline.INDEFINITE);
-			animation.play(); // Start animation
+			animation.play(); 
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * The main method is only needed for the IDE with limited
-	 * JavaFX support. Not needed for running from the command line.
-	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
