@@ -37,8 +37,6 @@ public class GameController
 		addBullet();
 		//bind shooter
 		shooter.bind(shooterRender);
-		//System.out.println(shooterRender.getCenterX()+" "+shooter.getX());
-		//System.out.println(shooterRender.getCenterY()+" "+shooter.getY());
 		//bind label
 		scoreLabel.textProperty().bind(Bindings.concat("score: ").concat(shooter.getScore().asString()));
 		healthLabel.textProperty().bind(Bindings.concat("health: ").concat(shooter.getHealth().asString()));
@@ -67,15 +65,6 @@ public class GameController
 	{
 		Bullet b=new Bullet(shooter.getX(),shooter.getY(),shooter.getX()+100,shooter.getY()+100);
 		bullets.add(b);
-		/*
-		l.setLayoutX(0);
-		l.setLayoutY(0);
-		System.out.println(shooter.getX());
-		l.setStartX(shooter.getX());
-		l.setStartY(shooter.getY());
-		l.setEndX(shooter.getX()+100);
-		l.setEndY(shooter.getY()+100);
-		*/
 		gamePane.getChildren().add(b.getLine());
 	}
 	public void removeBullet(Bullet b)
@@ -104,11 +93,14 @@ public class GameController
 	}
 	public void movePhase()
 	{
+		//move enemy
+		//move bullet
 		for(Iterator<Bullet> itor =bullets.iterator();itor.hasNext();)
 		{
 			Bullet b=itor.next();
 			b.move();
 		}
+		//move player
 		shooter.accelerate();
 		shooter.move();
 	}
