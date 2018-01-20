@@ -147,6 +147,13 @@ public class GameController
 			}
 		}
 		//remove Enemy
+		for(int i =0; i<Main.Enemies.size(); i++)
+		{
+			if(!Main.Enemies.get(i).inBound())
+			{
+				Main.Enemies.remove(i);
+			}
+		}
 	}
 	public void scoreInc(int increment)
 	{
