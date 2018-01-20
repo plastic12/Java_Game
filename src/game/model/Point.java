@@ -7,7 +7,9 @@ public class Point
 {
 	private SimpleDoubleProperty x;
 	private SimpleDoubleProperty y;
-	public Point(){}
+	public Point(){
+		x=new SimpleDoubleProperty();y=new SimpleDoubleProperty();
+	}
 	public Point(double x,double y){this.x=new SimpleDoubleProperty(x);this.y=new SimpleDoubleProperty(y);}
 	public double getDistance(Point p)
 	{

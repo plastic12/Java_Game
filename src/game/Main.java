@@ -22,7 +22,6 @@ public class Main extends Application {
 	public static final int FPS=50;
 	private Stage primaryStage;
 	private StackPane gamePane;
-	public static LinkedList<Enemy> Enemies;
 
 	@Override // Override the start method in the Application class
 	public void start(Stage primaryStage) {
@@ -38,7 +37,7 @@ public class Main extends Application {
 			EventHandler<ActionEvent> eventHandler = e -> 
 			{
 				//gen enemy
-				Enemies.add(new Enemy());
+				gameController.addEnemy();
 				//gen bullet
 				gameController.genBullet();
 				//move

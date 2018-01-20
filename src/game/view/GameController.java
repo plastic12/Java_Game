@@ -28,6 +28,7 @@ public class GameController
 	@FXML
 	private AnchorPane gamePane;
 	private LinkedList<Bullet> bullets;
+	public static LinkedList<Enemy> enemies;
 	private Shooter shooter;
 	private double mouseX=0;
 	private double mouseY=0;
@@ -40,6 +41,7 @@ public class GameController
 	public void init()
 	{	
 		bullets=new LinkedList<Bullet>();
+		enemies=new LinkedList<Enemy>();
 		shooter=new Shooter();
 		//addBullet();
 		//bind shooter
@@ -59,6 +61,10 @@ public class GameController
 					}
 			
 				});
+	}
+	public void addEnemy()
+	{
+		enemies.add(new Enemy());
 	}
 	public void pressHandler(KeyEvent e)
 	{
@@ -143,15 +149,15 @@ public class GameController
 			{
 				gamePane.getChildren().remove(b.getLine());
 				itor.remove();
-				System.out.println("removed");
+				//System.out.println("removed");
 			}
 		}
 		//remove Enemy
-		for(int i =0; i<Main.Enemies.size(); i++)
+		for(int i =0; i<enemies.size(); i++)
 		{
-			if(!Main.Enemies.get(i).inBound())
+			if(!enemies.get(i).inBound())
 			{
-				Main.Enemies.remove(i);
+				enemies.remove(i);
 			}
 		}
 	}
