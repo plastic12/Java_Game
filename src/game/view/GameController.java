@@ -64,7 +64,9 @@ public class GameController
 	}
 	public void addEnemy()
 	{
-		enemies.add(new Enemy());
+		Enemy e = new Enemy();
+		enemies.add(e);
+		gamePane.getChildren().add(e.getCircle());
 	}
 	public void pressHandler(KeyEvent e)
 	{
@@ -129,6 +131,11 @@ public class GameController
 	public void movePhase()
 	{
 		//move enemy
+		for(Iterator<Enemy> itor =enemies.iterator();itor.hasNext();)
+		{
+			Enemy b=itor.next();
+			b.move();
+		}
 		//move bullet
 		for(Iterator<Bullet> itor =bullets.iterator();itor.hasNext();)
 		{
@@ -153,11 +160,13 @@ public class GameController
 			}
 		}
 		//remove Enemy
-		for(int i =0; i<enemies.size(); i++)
+		for(Iterator<Enemy> itor=enemies.iterator();itor.hasNext();)
 		{
-			if(!enemies.get(i).inBound())
+			Enemy b=itor.next();
+			if(!b.inBound())
 			{
-				enemies.remove(i);
+				gamePane.getChildren().remove(b.getCircle());
+				itor.remove();
 			}
 		}
 	}
