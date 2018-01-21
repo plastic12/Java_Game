@@ -14,7 +14,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
@@ -22,6 +26,7 @@ public class Main extends Application {
 	public static final int FPS=50;
 	private Stage primaryStage;
 	private StackPane gamePane;
+	private Scene scene;
 
 	@Override // Override the start method in the Application class
 	public void start(Stage primaryStage) {
@@ -48,7 +53,7 @@ public class Main extends Application {
 				gameController.removeOutBound();
 			};
 
-			Scene scene=new Scene(gamePane);
+			scene=new Scene(gamePane);
 			//add event handler
 			scene.addEventHandler(KeyEvent.KEY_PRESSED, e->{
 				gameController.pressHandler(e);
@@ -57,7 +62,7 @@ public class Main extends Application {
 				gameController.releaseHandler(e);
 			});
 			//render init
-			primaryStage.setScene(scene);
+			primaryStage.setScene(start());
 			primaryStage.setTitle("game");
 			primaryStage.setResizable(false);
 			primaryStage.show();
@@ -74,5 +79,18 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
+	public Scene start()
+	{	
+		StackPane startPane = new StackPane();
+		Button Startbtn = new Button("Start");
+		Startbtn.setOnMouseClicked(e -> {
+			primaryStage.setScene(scene);
+		});
+		startPane.getChildren().add(Startbtn);
+		Scene start = new Scene(startPane);
+		return start;
+	}
+	
 }
 
