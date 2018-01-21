@@ -75,8 +75,7 @@ public class Enemy extends Entity {
 			break;
 		}
 		}
-		p.setX(p.getX()+xVelocity/Main.FPS);
-		p.setY(p.getY()+yVelocity/Main.FPS);
+		super.move();
 	}
 	
 }
