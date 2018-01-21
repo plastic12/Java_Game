@@ -1,46 +1,52 @@
 package game.model;
 
-import java.util.Iterator;
-
 import game.Main;
 import game.view.GameController;
+import javafx.scene.shape.Circle;
 
 public class Enemy extends Entity {
 	private int life =1;
 	private int damage = 1;
+	public static final double ACCELERATION=50;
+	public static final double SPEED_LIMIT=100;
+	private Circle face;
 	private int direction; //0:up, 1:down, 2:left, 3:right
 	
 	public Enemy() {
-		super();
-		switch ((int) Math.random()*4) {
+		super(Math.random()*GameController.XBOUND, Math.random()*GameController.YBOUND, 10);
+		face = new Circle();
+		bind(face);
+		direction = (int) (Math.random()*4);
+		
+		switch (direction) {
 		case 0: {
 			p.setX(Math.random()*GameController.XBOUND);
-			p.setY(560);
-			direction = 0;
+			p.setY(GameController.YBOUND);
 			break;
 		}
 		case 1: {
 			p.setX(Math.random()*GameController.XBOUND);
 			p.setY(0);
-			direction = 1;
 			break;
 		}
 		case 2: {
-			p.setX(602);
-			p.setY(Math.random()*GameController.YBOUND);
-			direction = 2;
+			p.setX(GameController.XBOUND);
+			p.setY(GameController.YBOUND);
 			break;
 		}
 		default: {
 			p.setX(0);
 			p.setY(Math.random()*GameController.YBOUND);
-			direction = 3;
 			break;
 		}
+		}
 	}
-		
+	public Enemy(double x, double y)
+	{
+		super(x, y, 10);
+		face  = new Circle();
+		bind(face);
 	}
-	
 	public int getDamage() {
 		return damage;
 	}
@@ -55,27 +61,39 @@ public class Enemy extends Entity {
 	{
 		switch (direction) {
 		case 0: {
-			xVelocity = 0;
-			yVelocity = 1;
+			xVelocity-=Math.signum(xVelocity)*ACCELERATION/Main.FPS;
+			yVelocity-=ACCELERATION/Main.FPS;
 			break;
 		}
 		case 1: {
-			xVelocity = 0;
-			yVelocity = -1;
+			xVelocity-=Math.signum(xVelocity)*ACCELERATION/Main.FPS;
+			yVelocity+=ACCELERATION/Main.FPS;
 			break;
 		}
 		case 2: {
-			xVelocity = -1;
-			yVelocity = 0;
+			xVelocity-=ACCELERATION/Main.FPS;
+			yVelocity-=Math.signum(yVelocity)*ACCELERATION/Main.FPS;
 			break;
 		}
 		default: {
-			xVelocity = 1;
-			yVelocity = 0;
+			xVelocity+=ACCELERATION/Main.FPS;
+			yVelocity-=Math.signum(yVelocity)*ACCELERATION/Main.FPS;
 			break;
 		}
 		}
+		if(xVelocity>SPEED_LIMIT)
+			xVelocity=SPEED_LIMIT;
+		if(xVelocity<-SPEED_LIMIT)
+			xVelocity=-SPEED_LIMIT;
+		if(yVelocity>SPEED_LIMIT)
+			yVelocity=SPEED_LIMIT;
+		if(yVelocity<-SPEED_LIMIT)
+			yVelocity=-SPEED_LIMIT;
 		super.move();
 	}
 	
+	public Circle getCircle()
+	{
+		return face;
+	}
 }
