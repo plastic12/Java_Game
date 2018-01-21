@@ -13,10 +13,12 @@ public class Bullet
 	private double[][] affineM;
 	public static final double velocity=100;
 	public static final double length=10;
+	
 	public Bullet()
 	{}
 	public Bullet(double x1,double y1,double x2,double y2)
 	{
+		affineM=MatrixHelper.getAffineTransformation(x1, y1, x2, y2);
 		p1=new Point(x1,y1);
 		double distance=Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
 		p2=new Point(x1+(x2-x1)*length/distance,y1+(y2-y1)*length/distance);

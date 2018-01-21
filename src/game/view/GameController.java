@@ -33,7 +33,9 @@ public class GameController
 	private double mouseX=0;
 	private double mouseY=0;
 	private int shootCounter=0;
+	private int enemyCounter=0;
 	public static final double shootfreq=2;
+	public static final double enemyfreq=1;
 	public static final double XBOUND=600;
 	public static final double YBOUND=500;
 	public GameController() {
@@ -61,6 +63,15 @@ public class GameController
 					}
 			
 				});
+	}
+	public void genEnemy()
+	{
+		enemyCounter++;
+		if(enemyCounter>=Main.FPS/enemyfreq)
+		{
+			addEnemy();
+			enemyCounter=0;
+		}
 	}
 	public void addEnemy()
 	{
@@ -96,7 +107,6 @@ public class GameController
 			addBullet();
 			shootCounter=0;
 		}
-		
 	}
 	private void addBullet()
 	{
@@ -145,6 +155,10 @@ public class GameController
 		//move player
 		shooter.accelerate();
 		shooter.move();
+	}
+	public void collisionPhase()
+	{
+		
 	}
 	public void removeOutBound()
 	{

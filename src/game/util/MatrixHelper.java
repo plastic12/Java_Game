@@ -20,4 +20,29 @@ public final class MatrixHelper
 		affineM[2][2]=1;
 		return affineM;
 	}
+	public static double[] twoDAffineTransform(double[][] affineM,double x,double y)
+	{
+		double[] output=new double[3];
+		//matrix multiplication
+		for(int i=0;i<3;i++)
+		{
+			for(int j=0;j<3;j++)
+			{
+				switch(j)
+				{
+				case 0:
+					output[i]+=x*affineM[i][j];
+					break;
+				case 1:
+					output[i]+=y*affineM[i][j];
+					break;
+				case 2:
+					output[i]+=1*affineM[i][j];
+					break;
+				}
+			}
+			System.out.printf("%.2f\n",output[i]);
+		}
+		return output;
+	}
 }

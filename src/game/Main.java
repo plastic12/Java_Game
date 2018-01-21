@@ -37,12 +37,13 @@ public class Main extends Application {
 			EventHandler<ActionEvent> eventHandler = e -> 
 			{
 				//gen enemy
-				gameController.addEnemy();
+				gameController.genEnemy();
 				//gen bullet
 				gameController.genBullet();
 				//move
 				gameController.movePhase();
 				//check collision
+				gameController.collisionPhase();
 				//remove outBound object
 				gameController.removeOutBound();
 			};
