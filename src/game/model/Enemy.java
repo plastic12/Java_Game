@@ -5,12 +5,12 @@ import game.view.GameController;
 import javafx.scene.shape.Circle;
 
 public class Enemy extends Entity {
+	private int score=10;
 	private int life =1;
 	private int damage = 1;
 	public static final double velocity=20;
 	private Circle face;
 	private int direction; //0:up, 1:down, 2:left, 3:right
-	
 	public Enemy() {
 		super(Math.random()*GameController.XBOUND, Math.random()*GameController.YBOUND, 10);
 		face = new Circle();
@@ -62,7 +62,7 @@ public class Enemy extends Entity {
 	{
 		return p.getX()>0&&p.getX()<GameController.XBOUND&&p.getY()>0&&p.getY()<GameController.YBOUND;
 	}
-	
+	public int getScore() {return score;}
 	public Circle getCircle()
 	{
 		return face;

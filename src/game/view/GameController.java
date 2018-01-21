@@ -34,8 +34,10 @@ public class GameController
 	private double mouseY=0;
 	private int shootCounter=0;
 	private int enemyCounter=0;
+	private int collCheckCounter=0;
 	public static final double shootfreq=2;
 	public static final double enemyfreq=1;
+	public static final double collisionCheckfreq=50;
 	public static final double XBOUND=600;
 	public static final double YBOUND=500;
 	public GameController() {
@@ -53,16 +55,16 @@ public class GameController
 		healthLabel.textProperty().bind(Bindings.concat("health: ").concat(shooter.getHealth().asString()));
 		//add mouse monitor
 		gamePane.setOnMouseMoved(new EventHandler<MouseEvent>()
-				{
+		{
 
-					@Override
-					public void handle(MouseEvent event) {
-						// TODO Auto-generated method stub
-						mouseX=event.getX();
-						mouseY=event.getY();
-					}
-			
-				});
+			@Override
+			public void handle(MouseEvent event) {
+				// TODO Auto-generated method stub
+				mouseX=event.getX();
+				mouseY=event.getY();
+			}
+
+		});
 	}
 	public void genEnemy()
 	{
@@ -75,7 +77,7 @@ public class GameController
 	}
 	public void addEnemy()
 	{
-		Enemy e = new Enemy();
+		Enemy e=new Enemy();
 		enemies.add(e);
 		gamePane.getChildren().add(e.getCircle());
 	}
@@ -158,7 +160,30 @@ public class GameController
 	}
 	public void collisionPhase()
 	{
-		
+		collCheckCounter++;
+		if(collCheckCounter>=Main.FPS/collisionCheckfreq)
+		{
+			for(Iterator<Bullet> itor=bullets.iterator();itor.hasNext();)
+			{
+				Bullet b=itor.next();
+				
+				for(Iterator<Enemy> itor2=enemies.iterator();itor2.hasNext();)
+				{
+					Enemy e=itor2.next();
+					double distance=b.getDistance(e);
+					
+					if(distance<e.getR())
+					{
+						shooter.scoreInc(e.getScore());
+						itor.remove();
+						itor2.remove();
+						gamePane.getChildren().remove(b.getLine());
+						gamePane.getChildren().remove(e.getCircle());
+					}
+				}
+			}
+			collCheckCounter=0;
+		}
 	}
 	public void removeOutBound()
 	{

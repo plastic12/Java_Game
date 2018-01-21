@@ -35,4 +35,7 @@ public abstract class Entity
 		p.setX(p.getX()+xVelocity/Main.FPS);
 		p.setY(p.getY()+yVelocity/Main.FPS);
 	}
+	public double getX(){return p.getX();}
+	public double getY() {return p.getY();}
+	public double getR() {return radius.get();}
 }

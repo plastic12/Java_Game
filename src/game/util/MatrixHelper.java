@@ -41,7 +41,6 @@ public final class MatrixHelper
 					break;
 				}
 			}
-			System.out.printf("%.2f\n",output[i]);
 		}
 		return output;
 	}

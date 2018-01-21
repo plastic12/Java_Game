@@ -1,6 +1,7 @@
 package game.model;
 
 import game.Main;
+import game.util.Distance;
 import game.util.MatrixHelper;
 import game.view.GameController;
 import javafx.scene.shape.Line;
@@ -18,7 +19,6 @@ public class Bullet
 	{}
 	public Bullet(double x1,double y1,double x2,double y2)
 	{
-		affineM=MatrixHelper.getAffineTransformation(x1, y1, x2, y2);
 		p1=new Point(x1,y1);
 		double distance=Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
 		p2=new Point(x1+(x2-x1)*length/distance,y1+(y2-y1)*length/distance);
@@ -30,6 +30,13 @@ public class Bullet
 		render.endXProperty().bind(p2.getXProperty());
 		render.endYProperty().bind(p2.getYProperty());
 		affineM=MatrixHelper.getAffineTransformation(x1, y1, x2, y2);
+	}
+	public double getDistance(Entity e)
+	{
+		affineM=MatrixHelper.getAffineTransformation(p1.getX(), p1.getY(), p2.getX(), p2.getY());
+		double[] coord=MatrixHelper.twoDAffineTransform(affineM, e.getX(), e.getY());
+		//System.out.println(coord[0]+" "+coord[1]+" "+coord[2]);
+		return (coord[0]<0||coord[0]>length) ? (Math.min(Distance.getDistance(0, 0, coord[0], coord[1]), Distance.getDistance(0, length, coord[0], coord[1]))):Math.abs(coord[1]);
 	}
 	public Line getLine()
 	{
