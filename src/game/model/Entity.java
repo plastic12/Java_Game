@@ -1,6 +1,7 @@
 package game.model;
 
 import game.Main;
+import game.util.Distance;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.shape.Circle;
 
@@ -34,6 +35,10 @@ public abstract class Entity
 	{
 		p.setX(p.getX()+xVelocity/Main.FPS);
 		p.setY(p.getY()+yVelocity/Main.FPS);
+	}
+	public boolean isCollide(Entity e)
+	{
+		return (Distance.getDistance(p.getX(), p.getY(), e.getX(), e.getY())<(radius.get()+e.getR()));
 	}
 	public double getX(){return p.getX();}
 	public double getY() {return p.getY();}

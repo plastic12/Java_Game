@@ -163,6 +163,7 @@ public class GameController
 		collCheckCounter++;
 		if(collCheckCounter>=Main.FPS/collisionCheckfreq)
 		{
+			//bullet enemy check
 			for(Iterator<Bullet> itor=bullets.iterator();itor.hasNext();)
 			{
 				Bullet b=itor.next();
@@ -180,6 +181,18 @@ public class GameController
 						gamePane.getChildren().remove(b.getLine());
 						gamePane.getChildren().remove(e.getCircle());
 					}
+				}
+			}
+			//player enemy check
+			for(Iterator<Enemy> itor2=enemies.iterator();itor2.hasNext();)
+			{
+				Enemy e=itor2.next();
+				if(e.isCollide(shooter))
+				{
+					shooter.healthInc(-e.getDamage());
+					shooter.scoreInc(e.getScore());
+					itor2.remove();
+					gamePane.getChildren().remove(e.getCircle());
 				}
 			}
 			collCheckCounter=0;
