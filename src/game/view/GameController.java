@@ -11,6 +11,7 @@ import javafx.beans.binding.Bindings;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -27,6 +28,8 @@ public class GameController
 	private Circle shooterRender;
 	@FXML
 	private AnchorPane gamePane;
+	@FXML
+	private ImageView bg;
 	private LinkedList<Bullet> bullets;
 	public static LinkedList<Enemy> enemies;
 	private Shooter shooter;
@@ -65,6 +68,7 @@ public class GameController
 			}
 
 		});
+		//setbackground
 	}
 	public void genEnemy()
 	{
