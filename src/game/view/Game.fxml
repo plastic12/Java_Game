@@ -27,7 +27,7 @@
                <children>
                   <ImageView fitHeight="500.0" fitWidth="600.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../../../background.png" />
+                        <Image url="@background.png" />
                      </image>
                   </ImageView>
                   <Circle fx:id="shooterRender" centerX="500.0" centerY="100.0" fill="WHITE" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
