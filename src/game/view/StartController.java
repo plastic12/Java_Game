@@ -28,4 +28,8 @@ public class StartController {
     	Main.startGame();
     }
     
+    @FXML
+    public void goMenu(MouseEvent e) throws IOException {
+    	Main.viewLeaderboard();
+    }
 }
