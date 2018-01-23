@@ -49,7 +49,7 @@ public class Main extends Application {
 		primaryStage.setScene(StartScene);
 	}
 	
-	public static void Game() throws IOException {
+	public static void startGame() throws IOException {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("view/Game.fxml"));
 			StackPane gamePane =(StackPane) loader.load();

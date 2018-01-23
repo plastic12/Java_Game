@@ -23,6 +23,6 @@ public class GameOverController
     @FXML
     public void restart(MouseEvent event) throws IOException 
     {
-    		Main.Game();
+    		Main.startGame();
     }
 }

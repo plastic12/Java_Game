@@ -25,7 +25,7 @@ public class StartController {
 
     @FXML
     public void startGame(MouseEvent event) throws IOException {
-    	Main.Game();
+    	Main.startGame();
     }
     
 }
