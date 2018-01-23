@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="-127.0" layoutY="-185.0" prefHeight="560.0" prefWidth="602.0">
+         <children>
+            <ImageView fitHeight="375.0" fitWidth="475.0" layoutX="128.0" layoutY="184.0" pickOnBounds="true">
+               <image>
+                  <Image url="@background.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="211.0" layoutY="243.0" prefHeight="79.0" prefWidth="309.0" text="Game Over">
+               <font>
+                  <Font size="57.0" />
+               </font></Label>
+            <Label alignment="CENTER" layoutX="282.0" layoutY="322.0" prefHeight="29.0" prefWidth="76.0" text="Score:">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="score" layoutX="358.0" layoutY="322.0" prefHeight="29.0" prefWidth="91.0" text="1234">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="restart" alignment="CENTER" layoutX="309.0" layoutY="402.0" text="Restart">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="home" alignment="CENTER" layoutX="270.0" layoutY="457.0" text="Back to menu">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
