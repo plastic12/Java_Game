@@ -271,6 +271,6 @@ public class GameController
 	public void healthInc(int increment) {shooter.healthInc(increment);}
 	public boolean isDead()
 	{
-		return (shooter.getHealth()<99);
+		return (shooter.getHealth()<=0);
 	}
 }

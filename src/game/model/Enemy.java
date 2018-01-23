@@ -7,7 +7,7 @@ import javafx.scene.shape.Circle;
 public class Enemy extends Entity {
 	private int score=10;
 	private int life =1;
-	private int damage = 1;
+	private int damage = 50;
 	public static final double velocity=20;
 	private Circle face;
 	private int direction; //0:up, 1:down, 2:left, 3:right
