@@ -2,9 +2,11 @@ package game.model;
 
 import game.Main;
 import game.view.GameController;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.control.Label;
 import javafx.scene.shape.Circle;
 
 public class Shooter extends Entity
@@ -34,13 +36,21 @@ public class Shooter extends Entity
 	{
 		s.set(s.get()+increment);
 	}
-	public IntegerProperty getScore()
+	public int getScore()
 	{
-		return s;
+		return s.get();
 	}
-	public IntegerProperty getHealth()
+	public int getHealth()
 	{
-		return h;
+		return h.get();
+	}
+	public void bindHealth(Label health)
+	{
+		health.textProperty().bind(Bindings.concat("health: ").concat(h.asString()));
+	}
+	public void bindScore(Label score)
+	{
+		score.textProperty().bind(Bindings.concat("score: ").concat(s.asString()));
 	}
 	public void healthInc(int increment)
 	{

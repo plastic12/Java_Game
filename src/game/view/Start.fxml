@@ -18,7 +18,7 @@
                   <Image url="@background.png" />
                </image>
             </ImageView>
-            <Label fx:id="startBtn" alignment="CENTER" layoutX="256.0" layoutY="294.0" onMouseClicked="#startGame" prefHeight="44.0" prefWidth="91.0" text="Start">
+            <Label fx:id="startBtn" alignment="CENTER" layoutX="256.0" layoutY="294.0" onMouseClicked="#startGame" text="Start">
                <font>
                   <Font size="40.0" />
                </font></Label>

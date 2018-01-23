@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.view.GameOverController">
    <children>
       <Pane prefHeight="560.0" prefWidth="602.0">
          <children>
@@ -25,17 +25,17 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label fx:id="score" layoutX="316.0" layoutY="229.0" prefHeight="29.0" prefWidth="91.0" text="1234">
+            <Label fx:id="scoreLabel" layoutX="316.0" layoutY="229.0" prefHeight="29.0" prefWidth="91.0" text="1234">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label fx:id="restart" alignment="CENTER" layoutX="253.0" layoutY="336.0" text="Restart">
+            <Label fx:id="restart" alignment="CENTER" layoutX="253.0" layoutY="336.0" onMouseClicked="#restart" text="Restart">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <Label fx:id="home" alignment="CENTER" layoutX="215.0" layoutY="394.0" text="Back to menu">
+            <Label fx:id="home" alignment="CENTER" layoutX="215.0" layoutY="394.0" onMouseClicked="#menu" text="Back to menu">
                <font>
                   <Font size="30.0" />
                </font>

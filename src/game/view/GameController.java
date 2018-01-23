@@ -1,5 +1,6 @@
 package game.view;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -7,7 +8,10 @@ import game.Main;
 import game.model.Bullet;
 import game.model.Enemy;
 import game.model.Shooter;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -17,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.util.Duration;
 
 public class GameController 
 {
@@ -38,6 +43,7 @@ public class GameController
 	private int shootCounter=0;
 	private int enemyCounter=0;
 	private int collCheckCounter=0;
+	private Timeline loop;
 	public static final double shootfreq=2;
 	public static final double enemyfreq=1;
 	public static final double collisionCheckfreq=50;
@@ -47,6 +53,34 @@ public class GameController
 	}
 	public void init()
 	{	
+		//main loop
+		EventHandler<ActionEvent> eventHandler = e -> 
+		{
+			//System.out.println(10);
+			//gen enemy
+			genEnemy();
+			//gen bullet
+			genBullet();
+			//move
+			movePhase();
+			//check collision
+			collisionPhase();
+			//remove outBound object
+			removeOutBound();
+			//check dead
+			if(isDead())
+				try {
+					quitGame();
+					Main.gameOver(shooter.getScore());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		};
+		loop = new Timeline(
+				new KeyFrame(Duration.millis(1000/Main.FPS), eventHandler));
+		loop.setCycleCount(Timeline.INDEFINITE);
+		loop.play();
 		bullets=new LinkedList<Bullet>();
 		enemies=new LinkedList<Enemy>();
 		shooter=new Shooter();
@@ -54,8 +88,8 @@ public class GameController
 		//bind shooter
 		shooter.bind(shooterRender);
 		//bind label
-		scoreLabel.textProperty().bind(Bindings.concat("score: ").concat(shooter.getScore().asString()));
-		healthLabel.textProperty().bind(Bindings.concat("health: ").concat(shooter.getHealth().asString()));
+		shooter.bindHealth(healthLabel);
+		shooter.bindScore(scoreLabel);
 		//add mouse monitor
 		gamePane.setOnMouseMoved(new EventHandler<MouseEvent>()
 		{
@@ -69,6 +103,10 @@ public class GameController
 
 		});
 		//setbackground
+	}
+	public void quitGame()
+	{
+		loop.stop();
 	}
 	public void genEnemy()
 	{
@@ -231,4 +269,8 @@ public class GameController
 		shooter.scoreInc(increment);
 	}
 	public void healthInc(int increment) {shooter.healthInc(increment);}
+	public boolean isDead()
+	{
+		return (shooter.getHealth()<99);
+	}
 }

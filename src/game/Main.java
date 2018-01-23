@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import game.view.GameController;
+import game.view.GameOverController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -25,7 +26,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			this.primaryStage = primaryStage;
-			Start();
+			menu();
 					
 			primaryStage.setTitle("game");			
 			primaryStage.setResizable(false);
@@ -39,7 +40,7 @@ public class Main extends Application {
 		launch(args);
 	}
 	
-	public void Start() throws IOException {
+	public static void menu() throws IOException {
 		FXMLLoader loader1 = new FXMLLoader();
 		loader1.setLocation(Main.class.getResource("view/Start.fxml"));	
 		Pane startPane = (Pane) loader1.load();
@@ -51,26 +52,10 @@ public class Main extends Application {
 	public static void Game() throws IOException {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("view/Game.fxml"));
-			
 			StackPane gamePane =(StackPane) loader.load();
 			GameController gameController=loader.getController();
 			
 			gameController.init();
-			//main loop
-			EventHandler<ActionEvent> eventHandler = e -> 
-			{
-				//gen enemy
-				gameController.genEnemy();
-				//gen bullet
-				gameController.genBullet();
-				//move
-				gameController.movePhase();
-				//check collision
-				gameController.collisionPhase();
-				//remove outBound object
-				gameController.removeOutBound();
-			};
-
 			Scene scene=new Scene(gamePane);
 			//add event handler
 			scene.addEventHandler(KeyEvent.KEY_PRESSED, e->{
@@ -79,12 +64,20 @@ public class Main extends Application {
 			scene.addEventHandler(KeyEvent.KEY_RELEASED, e->{
 				gameController.releaseHandler(e);
 			});
-			primaryStage.setScene(scene);
-			Timeline animation = new Timeline(
-					new KeyFrame(Duration.millis(1000/FPS), eventHandler));
-			animation.setCycleCount(Timeline.INDEFINITE);
-			animation.play(); 			
+			primaryStage.setScene(scene);			
 		}
+	public static void gameOver(int score) throws IOException
+	{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("view/GameOver.fxml"));
+		Pane pane = (Pane) loader.load();
+		GameOverController controller=loader.getController();
+		if(controller==null)
+			System.out.println("fail");
+		controller.init(score);
+		Scene scene = new Scene(pane);
+		primaryStage.setScene(scene);
+	}
 	
 }
 
