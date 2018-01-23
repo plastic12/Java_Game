@@ -39,7 +39,7 @@ public class Main extends Application {
 		launch(args);
 	}
 	
-	public Scene Start() throws IOException {
+	public void Start() throws IOException {
 		FXMLLoader loader1 = new FXMLLoader();
 		loader1.setLocation(Main.class.getResource("view/Start.fxml"));	
 		Pane startPane = (Pane) loader1.load();
