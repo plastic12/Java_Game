@@ -22,7 +22,7 @@
                <font>
                   <Font size="40.0" />
                </font></Label>
-            <Label fx:id="Leaderboard" alignment="CENTER" layoutX="180.0" layoutY="374.0" prefHeight="14.0" prefWidth="243.0" text="Leaderboard">
+            <Label fx:id="Leaderboard" alignment="CENTER" layoutX="180.0" layoutY="374.0" onMouseClicked="#goMenu" prefHeight="14.0" prefWidth="243.0" text="Leaderboard">
                <font>
                   <Font size="40.0" />
                </font></Label>
