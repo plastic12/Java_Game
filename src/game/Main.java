@@ -19,7 +19,7 @@ import javafx.util.Duration;
 
 public class Main extends Application {
 	public static final int FPS=50;
-	private Stage primaryStage;
+	private static Stage primaryStage;
 
 	@Override // Override the start method in the Application class
 	public void start(Stage primaryStage) {
