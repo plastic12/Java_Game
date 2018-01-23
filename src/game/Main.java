@@ -79,5 +79,14 @@ public class Main extends Application {
 		primaryStage.setScene(scene);
 	}
 	
+	public static void viewLeaderboard() throws IOException {
+		FXMLLoader loader1 = new FXMLLoader();
+		loader1.setLocation(Main.class.getResource("view/Leaderboard.fxml"));	
+		
+		Pane leader = (Pane) loader1.load();
+
+		Scene leaderScene = new Scene(leader);
+		primaryStage.setScene(leaderScene);
+	}	
 }
 
