@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.view.LeaderboardController">
+   <children>
+      <Pane prefHeight="560.0" prefWidth="602.0">
+         <children>
+            <ImageView fitHeight="560.0" fitWidth="602.0" pickOnBounds="true">
+               <image>
+                  <Image url="@background.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="76.0" layoutY="148.0" prefHeight="5.0" prefWidth="50.0" text="1.">
+               <font>
+                  <Font size="48.0" />
+               </font>
+               <effect>
+                  <Reflection />
+               </effect>
+            </Label>
+            <Label layoutX="193.0" layoutY="246.0" text="2.">
+               <font>
+                  <Font size="48.0" />
+               </font>
+               <effect>
+                  <Reflection />
+               </effect>
+            </Label>
+            <Label layoutX="313.0" layoutY="352.0" text="3.">
+               <font>
+                  <Font size="48.0" />
+               </font>
+               <effect>
+                  <Reflection />
+               </effect>
+            </Label>
+            <Label alignment="CENTER" layoutX="164.0" layoutY="33.0" prefHeight="79.0" prefWidth="275.0" text="High Score">
+               <font>
+                  <Font size="50.0" />
+               </font></Label>
+            <Label fx:id="menu" layoutX="344.0" layoutY="485.0" onMouseClicked="#backMenu" text="Back to menu">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Label>
+            <Label fx:id="firstScore" layoutX="140.0" layoutY="148.0" text="1234">
+               <font>
+                  <Font size="48.0" />
+               </font>
+               <effect>
+                  <Reflection />
+               </effect>
+            </Label>
+            <Label fx:id="secondScore" layoutX="257.0" layoutY="246.0" text="1234">
+               <font>
+                  <Font size="48.0" />
+               </font>
+               <effect>
+                  <Reflection />
+               </effect>
+            </Label>
+            <Label fx:id="thirdScore" layoutX="377.0" layoutY="352.0" text="1234">
+               <font>
+                  <Font size="48.0" />
+               </font>
+               <effect>
+                  <Reflection />
+               </effect>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
