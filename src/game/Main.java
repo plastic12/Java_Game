@@ -18,7 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
-public class Main extends Application {
+public class Main extends Application{
 	public static final int FPS=50;
 	private static Stage primaryStage;
 
@@ -36,6 +36,7 @@ public class Main extends Application {
 				e.printStackTrace();
 			}
 	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
