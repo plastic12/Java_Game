@@ -2,7 +2,6 @@ package game.view;
 
 import java.io.IOException;
 
-import game.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
