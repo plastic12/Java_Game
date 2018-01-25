@@ -1,4 +1,3 @@
 
 *.class
-bin/game/Main.class
 src/game/TestMain.java
