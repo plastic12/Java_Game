@@ -4,3 +4,4 @@
 bin/game/Main.class
 *.class
 *.class
+src/game/TestMain.java
