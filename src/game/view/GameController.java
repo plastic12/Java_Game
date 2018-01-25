@@ -14,6 +14,7 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -25,6 +26,7 @@ import javafx.util.Duration;
 
 public class GameController 
 {
+	//renderer
 	@FXML
 	private Label scoreLabel;
 	@FXML
@@ -35,15 +37,20 @@ public class GameController
 	private AnchorPane gamePane;
 	@FXML
 	private ImageView bg;
+	private AnchorPane pausePane;
+	//model
 	private LinkedList<Bullet> bullets;
 	public static LinkedList<Enemy> enemies;
 	private Shooter shooter;
+	//system or counter
 	private double mouseX=0;
 	private double mouseY=0;
 	private int shootCounter=0;
 	private int enemyCounter=0;
 	private int collCheckCounter=0;
+	private boolean pause=false;
 	private Timeline loop;
+	// constant
 	public static final double shootfreq=2;
 	public static final double enemyfreq=1;
 	public static final double collisionCheckfreq=50;
@@ -51,12 +58,36 @@ public class GameController
 	public static final double YBOUND=500;
 	public GameController() {
 	}
-	public void init()
-	{	
-		//main loop
+	public void init() throws IOException
+	{
+		//init variable
+		bullets=new LinkedList<Bullet>();
+		enemies=new LinkedList<Enemy>();
+		shooter=new Shooter();
+		FXMLLoader loader=new FXMLLoader();
+		loader.setLocation(GameController.class.getResource("PausePane.fxml"));
+		pausePane=loader.load();
+		PauseController controller=loader.getController();
+		controller.bindGamePane(gamePane);
+		//bind model and render
+		shooter.bind(shooterRender);
+		shooter.bindHealth(healthLabel);
+		shooter.bindScore(scoreLabel);
+		//add mouse monitor
+		gamePane.setOnMouseMoved(new EventHandler<MouseEvent>()
+		{
+
+			@Override
+			public void handle(MouseEvent event) {
+				// TODO Auto-generated method stub
+				mouseX=event.getX();
+				mouseY=event.getY();
+			}
+
+		});
+		//main loop and animation
 		EventHandler<ActionEvent> eventHandler = e -> 
 		{
-			//System.out.println(10);
 			//gen enemy
 			genEnemy();
 			//gen bullet
@@ -81,28 +112,6 @@ public class GameController
 				new KeyFrame(Duration.millis(1000/Main.FPS), eventHandler));
 		loop.setCycleCount(Timeline.INDEFINITE);
 		loop.play();
-		bullets=new LinkedList<Bullet>();
-		enemies=new LinkedList<Enemy>();
-		shooter=new Shooter();
-		//addBullet();
-		//bind shooter
-		shooter.bind(shooterRender);
-		//bind label
-		shooter.bindHealth(healthLabel);
-		shooter.bindScore(scoreLabel);
-		//add mouse monitor
-		gamePane.setOnMouseMoved(new EventHandler<MouseEvent>()
-		{
-
-			@Override
-			public void handle(MouseEvent event) {
-				// TODO Auto-generated method stub
-				mouseX=event.getX();
-				mouseY=event.getY();
-			}
-
-		});
-		//setbackground
 	}
 	public void quitGame()
 	{
@@ -138,6 +147,22 @@ public class GameController
 			break;
 		case UP:
 			shooter.UP=true;
+			break;
+		case ESCAPE:
+			//System.out.println("pause");
+			if(!pause)
+			{
+				//pause
+				loop.pause();
+				gamePane.getChildren().add(pausePane);
+			}
+			else
+			{
+				//resume
+				loop.play();
+				gamePane.getChildren().remove(pausePane);
+			}
+			pause=!pause;
 			break;
 		default:
 			break;
