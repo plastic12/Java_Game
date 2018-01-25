@@ -92,10 +92,10 @@ public class GameController
 			genEnemy();
 			//gen bullet
 			genBullet();
-			//move
-			movePhase();
 			//check collision
 			collisionPhase();
+			//move
+			movePhase();
 			//remove outBound object
 			removeOutBound();
 			//check dead
