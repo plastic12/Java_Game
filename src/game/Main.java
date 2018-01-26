@@ -56,7 +56,7 @@ public class Main extends Application{
 			StackPane gamePane =(StackPane) loader.load();
 			GameController gameController=loader.getController();
 			
-			gameController.init();
+			gameController.init(gamePane);
 			Scene scene=new Scene(gamePane);
 			//add event handler
 			scene.addEventHandler(KeyEvent.KEY_PRESSED, e->{
@@ -65,7 +65,8 @@ public class Main extends Application{
 			scene.addEventHandler(KeyEvent.KEY_RELEASED, e->{
 				gameController.releaseHandler(e);
 			});
-			primaryStage.setScene(scene);			
+			primaryStage.setScene(scene);
+			gameController.start(1);
 		}
 	public static void gameOver(int score) throws IOException
 	{

@@ -20,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
@@ -37,7 +38,9 @@ public class GameController
 	private AnchorPane gamePane;
 	@FXML
 	private ImageView bg;
+	private Pane scenePane;
 	private AnchorPane pausePane;
+	private Curtain curtain;
 	//model
 	private LinkedList<Bullet> bullets;
 	public static LinkedList<Enemy> enemies;
@@ -49,6 +52,7 @@ public class GameController
 	private int enemyCounter=0;
 	private int collCheckCounter=0;
 	private boolean pause=false;
+	private boolean running=true;
 	private Timeline loop;
 	// constant
 	public static final double shootfreq=2;
@@ -58,7 +62,7 @@ public class GameController
 	public static final double YBOUND=500;
 	public GameController() {
 	}
-	public void init() throws IOException
+	public void init(Pane scene) throws IOException
 	{
 		//init variable
 		bullets=new LinkedList<Bullet>();
@@ -69,6 +73,10 @@ public class GameController
 		pausePane=loader.load();
 		PauseController controller=loader.getController();
 		controller.bindGamePane(gamePane);
+		//init curtain
+		scenePane=scene;
+		curtain=new Curtain(this);
+		curtain.bind(scene);
 		//bind model and render
 		shooter.bind(shooterRender);
 		shooter.bindHealth(healthLabel);
@@ -113,6 +121,12 @@ public class GameController
 		loop.setCycleCount(Timeline.INDEFINITE);
 		loop.play();
 	}
+	public void start(int level)
+	{
+		globalStop();
+		curtain.setText("Level: "+level);
+		curtain.start(scenePane);
+	}
 	public void quitGame()
 	{
 		loop.stop();
@@ -134,38 +148,41 @@ public class GameController
 	}
 	public void pressHandler(KeyEvent e)
 	{
-		switch(e.getCode())
+		if(running)
 		{
-		case LEFT:
-			shooter.LEFT=true;
-			break;
-		case RIGHT:
-			shooter.RIGHT=true;
-			break;
-		case DOWN:
-			shooter.DOWN=true;
-			break;
-		case UP:
-			shooter.UP=true;
-			break;
-		case ESCAPE:
-			//System.out.println("pause");
-			if(!pause)
+			switch(e.getCode())
 			{
-				//pause
-				loop.pause();
-				gamePane.getChildren().add(pausePane);
+			case LEFT:
+				shooter.LEFT=true;
+				break;
+			case RIGHT:
+				shooter.RIGHT=true;
+				break;
+			case DOWN:
+				shooter.DOWN=true;
+				break;
+			case UP:
+				shooter.UP=true;
+				break;
+			case ESCAPE:
+				//System.out.println("pause");
+				if(!pause)
+				{
+					//pause
+					loop.pause();
+					gamePane.getChildren().add(pausePane);
+				}
+				else
+				{
+					//resume
+					loop.play();
+					gamePane.getChildren().remove(pausePane);
+				}
+				pause=!pause;
+				break;
+			default:
+				break;
 			}
-			else
-			{
-				//resume
-				loop.play();
-				gamePane.getChildren().remove(pausePane);
-			}
-			pause=!pause;
-			break;
-		default:
-			break;
 		}
 	}
 	public void genBullet()
@@ -177,6 +194,8 @@ public class GameController
 			shootCounter=0;
 		}
 	}
+	public void globalStop() {running=false;loop.pause();}
+	public void globalPlay() {running=true;loop.play();}
 	private void addBullet()
 	{
 		Bullet b=new Bullet(shooter.getX(),shooter.getY(),mouseX,mouseY);
@@ -189,22 +208,25 @@ public class GameController
 	}
 	public void releaseHandler(KeyEvent e)
 	{
-		switch(e.getCode())
+		if(running)
 		{
-		case LEFT:
-			shooter.LEFT=false;
-			break;
-		case RIGHT:
-			shooter.RIGHT=false;
-			break;
-		case DOWN:
-			shooter.DOWN=false;
-			break;
-		case UP:
-			shooter.UP=false;
-			break;
-		default:
-			break;
+			switch(e.getCode())
+			{
+			case LEFT:
+				shooter.LEFT=false;
+				break;
+			case RIGHT:
+				shooter.RIGHT=false;
+				break;
+			case DOWN:
+				shooter.DOWN=false;
+				break;
+			case UP:
+				shooter.UP=false;
+				break;
+			default:
+				break;
+			}
 		}
 	}
 	public void movePhase()
@@ -234,12 +256,12 @@ public class GameController
 			for(Iterator<Bullet> itor=bullets.iterator();itor.hasNext();)
 			{
 				Bullet b=itor.next();
-				
+
 				for(Iterator<Enemy> itor2=enemies.iterator();itor2.hasNext();)
 				{
 					Enemy e=itor2.next();
 					double distance=b.getDistance(e);
-					
+
 					if(distance<e.getR())
 					{
 						shooter.scoreInc(e.getScore());
@@ -298,4 +320,12 @@ public class GameController
 	{
 		return (shooter.getHealth()<=0);
 	}
+	@Override
+	protected void finalize() throws Throwable {
+		// TODO Auto-generated method stub
+		System.out.println("gameController garbage");
+		super.finalize();
+	}
+	
+	
 }
