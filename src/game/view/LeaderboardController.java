@@ -25,6 +25,8 @@ public class LeaderboardController implements Initializable{
     private Label secondScore;
 
     private static ArrayList<Integer> score = new ArrayList<Integer>();
+		
+    private static File scoreSource;
     
     @FXML
     void backMenu(MouseEvent event) throws IOException {
@@ -37,7 +39,7 @@ public class LeaderboardController implements Initializable{
     	Collections.reverse(score);
     	
 		try {
-			PrintWriter writer = new PrintWriter(new File("score.txt"));
+			PrintWriter writer = new PrintWriter(scoreSource);
 			for (int i = 0; i < score.size(); i++) {			
 				writer.println(score.get(i));
 	    	}	     
@@ -56,7 +58,9 @@ public class LeaderboardController implements Initializable{
 		try {
 			//read previous score
 			score.clear();
-			Scanner sc = new Scanner(new File("score.txt"));		
+			URL location = LeaderboardController.class.getProtectionDomain().getCodeSource().getLocation();
+			scoreSource = new File(location.getFile() + "score.txt");
+			Scanner sc = new Scanner(scoreSource);		
 			while (sc.hasNextLine() && sc.hasNextInt()) {
 				score.add(sc.nextInt());
 				sc.nextLine();
