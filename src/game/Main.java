@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import game.view.GameController;
 import game.view.GameOverController;
+import game.view.LeaderboardController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
