@@ -22,6 +22,7 @@ import javafx.util.Duration;
 public class Main extends Application{
 	public static final int FPS=50;
 	private static Stage primaryStage;
+	private static LeaderboardController lc = new LeaderboardController();
 
 	@Override // Override the start method in the Application class
 	public void start(Stage primaryStage) {
@@ -79,7 +80,7 @@ public class Main extends Application{
 		if(controller==null)
 			System.out.println("fail");
 		controller.init(score);
-		LeaderboardController.addScore(score);
+		lc.addScore(score);
 		Scene scene = new Scene(pane);
 		primaryStage.setScene(scene);
 	}
