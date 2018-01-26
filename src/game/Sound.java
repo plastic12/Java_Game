@@ -9,7 +9,7 @@ public class Sound
 	private MediaPlayer player;
 		
 	public void set() {
-		music = new Media(ClassLoader.getSystemResource("liquid.wav")toString());
+		music = new Media(ClassLoader.getSystemResource("liquid.wav").toString());
 		MediaPlayer player = new MediaPlayer(music);
 		player.play();
 	}
