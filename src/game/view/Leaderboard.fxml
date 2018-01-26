@@ -26,7 +26,7 @@
                   <Font size="35.0" />
                </font>
             </Label>
-            <Label fx:id="firstScore" layoutX="140.0" layoutY="148.0" text="1234">
+            <Label fx:id="firstScore" layoutX="140.0" layoutY="148.0" text="0">
                <font>
                   <Font size="48.0" />
                </font>
@@ -34,7 +34,7 @@
                   <Reflection />
                </effect>
             </Label>
-            <Label fx:id="secondScore" layoutX="257.0" layoutY="246.0" text="1234">
+            <Label fx:id="secondScore" layoutX="257.0" layoutY="246.0" text="0">
                <font>
                   <Font size="48.0" />
                </font>
@@ -42,7 +42,7 @@
                   <Reflection />
                </effect>
             </Label>
-            <Label fx:id="thirdScore" layoutX="377.0" layoutY="352.0" text="1234">
+            <Label fx:id="thirdScore" layoutX="377.0" layoutY="352.0" text="0">
                <font>
                   <Font size="48.0" />
                </font>
