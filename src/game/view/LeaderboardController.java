@@ -60,6 +60,8 @@ public class LeaderboardController implements Initializable{
 			score.clear();
 			URL location = LeaderboardController.class.getProtectionDomain().getCodeSource().getLocation();
 			scoreSource = new File(location.getFile() + "score.txt");
+			if (!scoreSource.exists())
+				scoreSource.createNewFile();
 			Scanner sc = new Scanner(scoreSource);		
 			while (sc.hasNextLine() && sc.hasNextInt()) {
 				score.add(sc.nextInt());
@@ -70,11 +72,11 @@ public class LeaderboardController implements Initializable{
 	    	Collections.reverse(score);
 			
 			if (score.size()>=1) {
-				firstScore.textProperty().bind(Bindings.concat("1.").concat(score.get(0)));
+				firstScore.textProperty().bind(Bindings.concat("1. ").concat(score.get(0)));
 				if (score.size()>=2) {
-					secondScore.textProperty().bind(Bindings.concat("2.").concat(score.get(1)));
+					secondScore.textProperty().bind(Bindings.concat("2. ").concat(score.get(1)));
 					if (score.size() >=3)
-						thirdScore.textProperty().bind(Bindings.concat("3.").concat(score.get(2)));
+						thirdScore.textProperty().bind(Bindings.concat("3. ").concat(score.get(2)));
 				}					    
 			}
 		} catch (IOException e) {
