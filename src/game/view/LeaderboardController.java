@@ -33,6 +33,18 @@ public class LeaderboardController implements Initializable{
     	Main.menu();
     }
 
+public LeaderboardController() {
+	URL location = LeaderboardController.class.getProtectionDomain().getCodeSource().getLocation();
+	scoreSource = new File(location.getFile() + "score.txt");
+	if (!scoreSource.exists())
+		try {
+			scoreSource.createNewFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+	
     public static void addScore(int a) {
     	score.add(a);
     	Collections.sort(score);
@@ -58,10 +70,6 @@ public class LeaderboardController implements Initializable{
 		try {
 			//read previous score
 			score.clear();
-			URL location = LeaderboardController.class.getProtectionDomain().getCodeSource().getLocation();
-			scoreSource = new File(location.getFile() + "score.txt");
-			if (!scoreSource.exists())
-				scoreSource.createNewFile();
 			Scanner sc = new Scanner(scoreSource);		
 			while (sc.hasNextLine() && sc.hasNextInt()) {
 				score.add(sc.nextInt());
