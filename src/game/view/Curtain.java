@@ -19,7 +19,7 @@ public class Curtain
 	private Rectangle curtain;
 	private Label dialog;
 	private GameController controller;
-	public static final int COUNT=300;
+	public static final int COUNT=600;
 	public Curtain(GameController controller)
 	{
 		this.controller=controller;
@@ -71,6 +71,8 @@ public class Curtain
 		@Override
 		public void handle(ActionEvent event) {
 			counter++;
+			curtain.setOpacity(1-(double)counter/COUNT);
+			dialog.setOpacity(1-(double)counter/COUNT);
 			if(counter>COUNT)
 			{
 				open(scene);

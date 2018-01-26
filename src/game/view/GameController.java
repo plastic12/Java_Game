@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import game.Main;
 import game.model.Bullet;
 import game.model.Enemy;
+import game.model.Level;
 import game.model.Shooter;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -124,7 +125,7 @@ public class GameController
 	public void start(int level)
 	{
 		globalStop();
-		curtain.setText("Level: "+level);
+		curtain.setText(Level.level[level].getPrompt());
 		curtain.start(scenePane);
 	}
 	public void quitGame()
