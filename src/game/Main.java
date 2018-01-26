@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import game.view.GameController;
 import game.view.GameOverController;
+import game.view.LeaderboardController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -77,14 +78,14 @@ public class Main extends Application{
 		if(controller==null)
 			System.out.println("fail");
 		controller.init(score);
+		LeaderboardController.addScore(score);
 		Scene scene = new Scene(pane);
 		primaryStage.setScene(scene);
 	}
 	
 	public static void viewLeaderboard() throws IOException {
 		FXMLLoader loader1 = new FXMLLoader();
-		loader1.setLocation(Main.class.getResource("view/Leaderboard.fxml"));	
-		
+		loader1.setLocation(Main.class.getResource("view/Leaderboard.fxml"));			
 		Pane leader = (Pane) loader1.load();
 
 		Scene leaderScene = new Scene(leader);
