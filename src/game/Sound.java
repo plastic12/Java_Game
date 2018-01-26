@@ -1,6 +1,5 @@
 package game;
 
-import java.net.URISyntaxException;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -10,11 +9,7 @@ public class Sound
 	private MediaPlayer player;
 		
 	public void set() {
-		try {
-			music = new Media(ClassLoader.getSystemResource("liquid.wav").toURI().toString());
-		} catch (URISyntaxException e) {
-			System.out.println("Media not found");
-		}
+		music = new Media(ClassLoader.getSystemResource("liquid.wav")toString());
 		MediaPlayer player = new MediaPlayer(music);
 		player.play();
 	}
