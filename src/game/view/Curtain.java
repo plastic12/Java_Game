@@ -19,7 +19,7 @@ public class Curtain
 	private Rectangle curtain;
 	private Label dialog;
 	private GameController controller;
-	public static final int COUNT=600;
+	public static final int COUNT=300;
 	public Curtain(GameController controller)
 	{
 		this.controller=controller;

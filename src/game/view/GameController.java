@@ -61,6 +61,8 @@ public class GameController
 	public static final double collisionCheckfreq=50;
 	public static final double XBOUND=600;
 	public static final double YBOUND=500;
+	//toggle testing constant
+	public static final boolean USECURTAIN=false;
 	public GameController() {
 	}
 	public void init(Pane scene) throws IOException
@@ -124,9 +126,12 @@ public class GameController
 	}
 	public void start(int level)
 	{
-		globalStop();
-		curtain.setText(Level.level[level].getPrompt());
-		curtain.start(scenePane);
+		if(USECURTAIN)
+		{
+			globalStop();
+			curtain.setText(Level.level[level].getPrompt());
+			curtain.start(scenePane);
+		}
 	}
 	public void quitGame()
 	{
