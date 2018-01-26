@@ -28,6 +28,7 @@ public class Main extends Application{
 		try {
 			this.primaryStage = primaryStage;
 			menu();
+			music();
 					
 			primaryStage.setTitle("game");			
 			primaryStage.setResizable(false);
@@ -91,5 +92,11 @@ public class Main extends Application{
 		Scene leaderScene = new Scene(leader);
 		primaryStage.setScene(leaderScene);
 	}	
+	
+	public void music() {
+		Sound bgm = new Sound();
+		bgm.set();
+	}
+	
 }
 
