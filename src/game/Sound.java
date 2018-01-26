@@ -1,42 +1,20 @@
 package game;
-import javax.swing.*;
-import sun.audio.*;
-import java.awt.event.*;
-import java.io.*;
+
+import java.net.URISyntaxException;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 public class Sound 
 {
-	public static void main(String[] args) throws FileNotFoundException
-	{
-		FileInputStream f=new FileInputStream(new File("liquid.wav"));
-		JFrame frame = new JFrame();
-		frame.setSize(200,200);
-		JButton button = new JButton("Click me");
-		frame.add(button);
-		button.addActionListener(new AL());
-		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-	}
-
-	public static class AL implements ActionListener
-	{
-		public final void actionPerformed(ActionEvent e){
-			music();
+	private Media music;
+	private MediaPlayer playerl
+		
+	public void set() {
+		try {
+			music = new Media(ClassLoader.getSystemResouce("liquid.wav").toURI().toString());
+		} catch (URISyntaxException e) {
+			System.out.println("Media not found");
 		}
-	}
-
-	public static void music(){
-		AudioPlayer MGP = AudioPlayer.player;
-		AudioStream BGM;
-		AudioData MD;
-		ContinuousAudioDataStream loop = null;
-		try{
-			BGM = new AudioStream(new FileInputStream("liquid.wav"));
-			MD = BGM.getData();
-			loop = new ContinuousAudioDataStream(MD);
-		}catch(IOException error){
-			System.out.print("file not found");
-			System.out.println(error.getMessage());
-		}
-		MGP.start(loop);
-	}
+		MediaPlayer player = new MediaPlayer(music);
+		player.play();
 }
