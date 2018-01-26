@@ -10,7 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
-public class LeaderboardController {
+public class LeaderboardController implements Initializable{
 
     @FXML
     private Label thirdScore;
