@@ -23,13 +23,13 @@ public class Main extends Application{
 	public static final int FPS=50;
 	private static Stage primaryStage;
 	private static LeaderboardController lc = new LeaderboardController();
+	private static Sound bgm = new Sound();
 
 	@Override // Override the start method in the Application class
 	public void start(Stage primaryStage) {
 		try {
 			this.primaryStage = primaryStage;
 			menu();
-			music();
 					
 			primaryStage.setTitle("game");			
 			primaryStage.setResizable(false);
@@ -50,6 +50,7 @@ public class Main extends Application{
 		Pane startPane = (Pane) loader1.load();
 
 		Scene StartScene = new Scene(startPane);
+		bgm.menu();
 		primaryStage.setScene(StartScene);
 	}
 	
@@ -70,9 +71,11 @@ public class Main extends Application{
 			});
 			primaryStage.setScene(scene);
 			gameController.start(1);
+			bgm.game();
 		}
 	public static void gameOver(int score) throws IOException
 	{
+		bgm.gameOver();
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("view/GameOver.fxml"));
 		Pane pane = (Pane) loader.load();
@@ -92,12 +95,6 @@ public class Main extends Application{
 
 		Scene leaderScene = new Scene(leader);
 		primaryStage.setScene(leaderScene);
-	}	
-	
-	public void music() {
-		Sound bgm = new Sound();
-		bgm.set();
-	}
-	
+	}		
 }
 
