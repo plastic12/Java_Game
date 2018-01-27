@@ -62,7 +62,7 @@ public class GameController
 	public static final double XBOUND=600;
 	public static final double YBOUND=500;
 	//toggle testing constant
-	public static final boolean USECURTAIN=true;
+	public static final boolean USECURTAIN=false;
 	
 	public GameController() {
 	}

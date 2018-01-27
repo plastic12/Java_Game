@@ -86,7 +86,7 @@ public class Level
 						score.set(score.get()+e.getScore());
 						itor.remove();
 						itor2.remove();
-						progress.set(progress.get()+20);
+						progress.set(progress.get());
 						observableList.remove(b.getLine());
 						observableList.remove(e.getCircle());
 					}
