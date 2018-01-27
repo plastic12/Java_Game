@@ -1,0 +1,21 @@
+package game.model;
+
+import javafx.scene.shape.Circle;
+
+public final class CircleFactory 
+{
+	//this is a class to generate circle, all the function should be static.
+	//TODO
+	public static Circle powerUpgrade()
+	{
+		return new Circle();
+	}
+	public static Circle scoreUpgrade()
+	{
+		return new Circle();
+	}
+	public static Circle progressUpgrade()
+	{
+		return new Circle();
+	}
+}

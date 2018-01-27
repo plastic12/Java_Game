@@ -19,6 +19,7 @@ public class Level
 	private SimpleIntegerProperty progress;
 	private LinkedList<Bullet> bullets;
 	private LinkedList<Enemy> enemies;
+	private LinkedList<Upgrade> upgrades;
 	public static final int LEVELCOUNT=8;
 	public static final int enemyfreq=1;
 	public static final int collisionCheckfreq=50;
@@ -115,6 +116,10 @@ public class Level
 		movePhase(shooter);
 		removeOutBound(observableList);
 		return(progress.get()==100);
+	}
+	public void upgradeTimeout(ObservableList<Node> observableList)
+	{
+		
 	}
 	public void removeOutBound(ObservableList<Node> observableList)
 	{
