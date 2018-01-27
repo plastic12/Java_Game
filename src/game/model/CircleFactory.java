@@ -1,5 +1,6 @@
 package game.model;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public final class CircleFactory 
@@ -14,7 +15,7 @@ public final class CircleFactory
 	{
 		return new Circle();
 	}
-	public static Circle progressUpgrade()
+	public static Circle progressUpgrade(Color color)
 	{
 		return new Circle();
 	}
