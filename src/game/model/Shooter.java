@@ -13,27 +13,30 @@ import javafx.scene.shape.Rectangle;
 
 public class Shooter extends Entity
 {
+	//init value
 	public static final double INIT_X=300;
 	public static final double INIT_Y=250;
 	public static final double INIT_R=10;
-	
-	
-	
+	//constant
 	public static final int MAX_HEALTH=100;
 	public static final int MAX_POWER=100;
 	public static final double ACCELERATION=50;
 	public static final double SPEED_LIMIT=100;
-	private SimpleIntegerProperty s;
+	//attribute
 	private SimpleIntegerProperty health;
 	private SimpleIntegerProperty power;
 	public boolean LEFT=false;
 	public boolean RIGHT=false;
 	public boolean DOWN=false;
 	public boolean UP=false;
+	//helper variable
+	private double mouseX=0;
+	private double mouseY=0;
+	private int shootCounter=0;
+	public static final double shootfreq=2;
 	public Shooter()
 	{
 		super(INIT_X,INIT_Y,INIT_R);
-		s=new SimpleIntegerProperty(0);
 		health=new SimpleIntegerProperty(MAX_HEALTH);
 		power=new SimpleIntegerProperty(0);
 		xVelocity=0;
@@ -74,10 +77,6 @@ public class Shooter extends Entity
 	{
 		powerBar.widthProperty().bind(power);
 	}
-	public void bindScore(Label score)
-	{
-		score.textProperty().bind(Bindings.concat("score: ").concat(s.asString()));
-	}
 	public int getHealth()
 	{
 		return health.get();
@@ -86,10 +85,6 @@ public class Shooter extends Entity
 	public void getHit()
 	{
 		
-	}
-	public int getScore()
-	{
-		return s.get();
 	}
 	public double getX() {return p.getX();}
 	public double getY() {return p.getY();}
@@ -118,8 +113,29 @@ public class Shooter extends Entity
 			temp=MAX_POWER;
 		return;
 	}
-	public void scoreInc(int increment)
+	public void setMouseX(double mouseX) {
+		this.mouseX = mouseX;
+	}
+	public void setMouseY(double mouseY) {
+		this.mouseY = mouseY;
+	}
+	private Bullet addBullet()
 	{
-		s.set(s.get()+increment);
+		return new Bullet(getX(),getY(),mouseX,mouseY);
+		/*
+		bullets.add(b);
+		gamePane.getChildren().add(b.getLine());
+		*/
+	}
+	public Bullet shoot()
+	{
+		shootCounter++;
+		if(shootCounter>=Main.FPS/shootfreq)
+		{
+			shootCounter=0;
+			return addBullet();
+		}
+		else
+			return null;
 	}
 }

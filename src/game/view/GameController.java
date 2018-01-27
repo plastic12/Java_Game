@@ -49,41 +49,47 @@ public class GameController
 	private AnchorPane pausePane;
 	private Curtain curtain;
 	//model
-	private LinkedList<Bullet> bullets;
-	public static LinkedList<Enemy> enemies;
 	private Shooter shooter;
-	private SimpleIntegerProperty progress;
+	private SimpleIntegerProperty score;
+	private Level level;
+	private int levelNo;
 	//system or counter
-	private double mouseX=0;
-	private double mouseY=0;
-	private int shootCounter=0;
-	private int enemyCounter=0;
-	private int collCheckCounter=0;
+
 	private boolean pause=false;
 	private boolean running=true;
 	private Timeline loop;
 	// constant
-	public static final double shootfreq=2;
-	public static final double enemyfreq=1;
-	public static final double collisionCheckfreq=50;
 	public static final double XBOUND=600;
 	public static final double YBOUND=500;
 	//toggle testing constant
-	public static final boolean USECURTAIN=false;
+	public static final boolean USECURTAIN=true;
+	
 	public GameController() {
 	}
+
+
+	@Override
+	protected void finalize() throws Throwable {
+		// TODO Auto-generated method stub
+		System.out.println("gameController garbage");
+		super.finalize();
+	}
+
+	public void globalPlay() {running=true;loop.play();}
+	public void globalStop() {running=false;loop.pause();}
+	public void healthInc(int increment) {shooter.healthInc(increment);}
 	public void init(Pane scene) throws IOException
 	{
 		//init variable
-		progress=new SimpleIntegerProperty(0);
-		bullets=new LinkedList<Bullet>();
-		enemies=new LinkedList<Enemy>();
+		score=new SimpleIntegerProperty(0);
 		shooter=new Shooter();
+		level=null;
 		FXMLLoader loader=new FXMLLoader();
 		loader.setLocation(GameController.class.getResource("PausePane.fxml"));
 		pausePane=loader.load();
 		PauseController controller=loader.getController();
 		controller.bindGamePane(gamePane);
+		
 		//init curtain
 		scenePane=scene;
 		curtain=new Curtain(this);
@@ -92,8 +98,7 @@ public class GameController
 		shooter.bindCircle(shooterRender);
 		shooter.bindHealth(healthBar);
 		shooter.bindPower(powerBar);
-		progressBar.widthProperty().bind(progress);
-		shooter.bindScore(scoreLabel);
+		scoreLabel.textProperty().bind(Bindings.concat("score: ").concat(score.asString()));
 		//add mouse monitor
 		gamePane.setOnMouseMoved(new EventHandler<MouseEvent>()
 		{
@@ -101,14 +106,15 @@ public class GameController
 			@Override
 			public void handle(MouseEvent event) {
 				// TODO Auto-generated method stub
-				mouseX=event.getX();
-				mouseY=event.getY();
+				shooter.setMouseX(event.getX());
+				shooter.setMouseY(event.getY());
 			}
 
 		});
 		//main loop and animation
 		EventHandler<ActionEvent> eventHandler = e -> 
 		{
+			/*
 			//gen enemy
 			genEnemy();
 			//gen bullet
@@ -120,47 +126,33 @@ public class GameController
 			//remove outBound object
 			removeOutBound();
 			//check dead
+				*/
+			boolean levelUp=level.loop(gamePane.getChildren(),score,shooter);
 			if(isDead())
 				try {
 					quitGame();
-					Main.gameOver(shooter.getScore());
+					Main.gameOver(score.get());
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+			if(levelUp)
+			{
+				cleanUp();
+				start(levelNo+1);
+			}
 		};
 		loop = new Timeline(
 				new KeyFrame(Duration.millis(1000/Main.FPS), eventHandler));
 		loop.setCycleCount(Timeline.INDEFINITE);
-		loop.play();
 	}
-	public void start(int level)
+	public boolean isDead()
 	{
-		if(USECURTAIN)
-		{
-			globalStop();
-			curtain.setText(Level.level[level].getPrompt());
-			curtain.start(scenePane);
-		}
+		return (shooter.getHealth()<=0);
 	}
-	public void quitGame()
+	public void cleanUp()
 	{
-		loop.stop();
-	}
-	public void genEnemy()
-	{
-		enemyCounter++;
-		if(enemyCounter>=Main.FPS/enemyfreq)
-		{
-			addEnemy();
-			enemyCounter=0;
-		}
-	}
-	public void addEnemy()
-	{
-		Enemy e=new Enemy();
-		enemies.add(e);
-		gamePane.getChildren().add(e.getCircle());
+		level.cleanUp(gamePane.getChildren());
 	}
 	public void pressHandler(KeyEvent e)
 	{
@@ -201,26 +193,9 @@ public class GameController
 			}
 		}
 	}
-	public void genBullet()
+	public void quitGame()
 	{
-		shootCounter++;
-		if(shootCounter>=Main.FPS/shootfreq)
-		{
-			addBullet();
-			shootCounter=0;
-		}
-	}
-	public void globalStop() {running=false;loop.pause();}
-	public void globalPlay() {running=true;loop.play();}
-	private void addBullet()
-	{
-		Bullet b=new Bullet(shooter.getX(),shooter.getY(),mouseX,mouseY);
-		bullets.add(b);
-		gamePane.getChildren().add(b.getLine());
-	}
-	public void removeBullet(Bullet b)
-	{
-		gamePane.getChildren().remove(b.getLine());
+		loop.stop();
 	}
 	public void releaseHandler(KeyEvent e)
 	{
@@ -245,102 +220,21 @@ public class GameController
 			}
 		}
 	}
-	public void movePhase()
+	public void removeBullet(Bullet b)
 	{
-		//move enemy
-		for(Iterator<Enemy> itor =enemies.iterator();itor.hasNext();)
-		{
-			Enemy b=itor.next();
-			b.move();
-		}
-		//move bullet
-		for(Iterator<Bullet> itor =bullets.iterator();itor.hasNext();)
-		{
-			Bullet b=itor.next();
-			b.move();
-		}
-		//move player
-		shooter.accelerate();
-		shooter.move();
+		gamePane.getChildren().remove(b.getLine());
 	}
-	public void collisionPhase()
+	public void start(int level)
 	{
-		collCheckCounter++;
-		if(collCheckCounter>=Main.FPS/collisionCheckfreq)
+		this.level=Level.initLevel(level);
+		levelNo=level;
+		loop.play();
+		if(USECURTAIN)
 		{
-			//bullet enemy check
-			for(Iterator<Bullet> itor=bullets.iterator();itor.hasNext();)
-			{
-				Bullet b=itor.next();
-
-				for(Iterator<Enemy> itor2=enemies.iterator();itor2.hasNext();)
-				{
-					Enemy e=itor2.next();
-					double distance=b.getDistance(e);
-
-					if(distance<e.getR())
-					{
-						shooter.scoreInc(e.getScore());
-						itor.remove();
-						itor2.remove();
-						gamePane.getChildren().remove(b.getLine());
-						gamePane.getChildren().remove(e.getCircle());
-					}
-				}
-			}
-			//player enemy check
-			for(Iterator<Enemy> itor2=enemies.iterator();itor2.hasNext();)
-			{
-				Enemy e=itor2.next();
-				if(e.isCollide(shooter))
-				{
-					shooter.healthInc(-e.getDamage());
-					shooter.scoreInc(e.getScore());
-					itor2.remove();
-					gamePane.getChildren().remove(e.getCircle());
-				}
-			}
-			collCheckCounter=0;
+			curtain.setText(this.level.getPrompt());
+			curtain.start(scenePane);
 		}
-	}
-	public void removeOutBound()
-	{
-		//remove Bullet
-		for(Iterator<Bullet> itor=bullets.iterator();itor.hasNext();)
-		{
-			Bullet b=itor.next();
-			if(!b.inBound())
-			{
-				gamePane.getChildren().remove(b.getLine());
-				itor.remove();
-				//System.out.println("removed");
-			}
-		}
-		//remove Enemy
-		for(Iterator<Enemy> itor=enemies.iterator();itor.hasNext();)
-		{
-			Enemy b=itor.next();
-			if(!b.inBound())
-			{
-				gamePane.getChildren().remove(b.getCircle());
-				itor.remove();
-			}
-		}
-	}
-	public void scoreInc(int increment)
-	{
-		shooter.scoreInc(increment);
-	}
-	public void healthInc(int increment) {shooter.healthInc(increment);}
-	public boolean isDead()
-	{
-		return (shooter.getHealth()<=0);
-	}
-	@Override
-	protected void finalize() throws Throwable {
-		// TODO Auto-generated method stub
-		System.out.println("gameController garbage");
-		super.finalize();
+		this.level.bindProgress(progressBar);
 	}
 	
 	
