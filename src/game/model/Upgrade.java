@@ -1,5 +1,8 @@
 package game.model;
 
+import game.Main;
+import javafx.scene.paint.Color;
+
 public class Upgrade extends Entity
 {
 	private static final int radius=5;
@@ -8,7 +11,9 @@ public class Upgrade extends Entity
 	private int scoreUp;
 	private int timeOutCounter;
 	private final int timeOut=10;
-	private Upgrade(int x,int y)
+	//testing constant
+	public static final int progressMul=50;
+	private Upgrade(double x,double y)
 	{
 		super(x,y,radius);
 		timeOutCounter=0;
@@ -22,34 +27,34 @@ public class Upgrade extends Entity
 	public int getScoreUp() {
 		return scoreUp;
 	}
-	public Upgrade powerUpgrade(int x,int y)
+	public static Upgrade powerUpgrade(double x,double y)
 	{
 		Upgrade u= new Upgrade(x,y);
-		setPowerUp(1);
-		setProgressUp(1);
-		setScoreUp(10);
+		u.setPowerUp(1);
+		u.setProgressUp(1);
+		u.setScoreUp(10);
 		//bind circle
-		bindCircle(CircleFactory.powerUpgrade());
+		u.bindCircle(CircleFactory.powerUpgrade());
 		return u;
 	}
-	public Upgrade progressUpgrade(int x,int y)
+	public static Upgrade progressUpgrade(double x,double y,Color color)
 	{
 		Upgrade u= new Upgrade(x,y);
-		setPowerUp(0);
-		setProgressUp((int)Math.random()*5);
-		setScoreUp(10);
+		u.setPowerUp(0);
+		u.setProgressUp((int)(Math.random()*progressMul));
+		u.setScoreUp(10);
 		//bind circle
-		bindCircle(CircleFactory.scoreUpgrade());
+		u.bindCircle(CircleFactory.progressUpgrade(color));
 		return u;
 	}
-	public Upgrade scoreUpgrade(int x,int y)
+	public static Upgrade scoreUpgrade(double x,double y)
 	{
 		Upgrade u= new Upgrade(x,y);
-		setPowerUp(0);
-		setProgressUp(1);
-		setScoreUp(50);
+		u.setPowerUp(0);
+		u.setProgressUp(1);
+		u.setScoreUp(50);
 		//bind circle
-		bindCircle(CircleFactory.scoreUpgrade());
+		u.bindCircle(CircleFactory.scoreUpgrade());
 		return u;
 	}
 	private void setPowerUp(int powerUp) {
@@ -61,4 +66,5 @@ public class Upgrade extends Entity
 	private void setScoreUp(int scoreUp) {
 		this.scoreUp = scoreUp;
 	}
+	public boolean timeOut() {timeOutCounter++;return(timeOutCounter>=timeOut*Main.FPS);}
 }

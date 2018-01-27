@@ -9,6 +9,7 @@ public abstract class Entity
 {
 	protected Point p;
 	private SimpleDoubleProperty radius;
+	private Circle circle;
 	protected double xVelocity;
 	protected double yVelocity;
 	public Entity()
@@ -23,14 +24,17 @@ public abstract class Entity
 	public Entity(double x,double y,double radius,Circle c)
 	{
 		this(x,y,radius);
+		circle=c;
 		bindCircle(c);
 	}
 	public void bindCircle(Circle c)
 	{
+		circle=c;
 		c.centerXProperty().bind(p.getXProperty());
 		c.centerYProperty().bind(p.getYProperty());
 		c.radiusProperty().bind(radius);
 	}
+	public Circle getCircle() {return circle;}
 	public void move()
 	{
 		p.setX(p.getX()+xVelocity/Main.FPS);

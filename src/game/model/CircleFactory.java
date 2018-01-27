@@ -9,14 +9,21 @@ public final class CircleFactory
 	//TODO
 	public static Circle powerUpgrade()
 	{
-		return new Circle();
+		Circle c=new Circle();
+		c.setFill(Color.BLACK);
+		return c;
 	}
 	public static Circle scoreUpgrade()
 	{
-		return new Circle();
+		Circle c=new Circle();
+		c.setFill(Color.WHITE);
+		c.setStroke(Color.BLACK);
+		return c;
 	}
 	public static Circle progressUpgrade(Color color)
 	{
-		return new Circle();
+		Circle c=new Circle();
+		c.setFill(color);
+		return c;
 	}
 }

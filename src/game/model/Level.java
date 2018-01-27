@@ -23,6 +23,9 @@ public class Level
 	public static final int LEVELCOUNT=8;
 	public static final int enemyfreq=1;
 	public static final int collisionCheckfreq=50;
+	public static final int powerUprate=20;
+	public static final int scoreUprate=20;
+	public static final int progressUprate=20;
 	public static Level initLevel(int level)
 	{
 		switch(level)
@@ -60,6 +63,7 @@ public class Level
 		progress=new SimpleIntegerProperty(0);
 		bullets=new LinkedList<Bullet>();
 		enemies=new LinkedList<Enemy>();
+		upgrades=new LinkedList<Upgrade>();
 		this.prompt=prompt;
 	}
 	public void bindProgress(Rectangle progressBar)
@@ -84,12 +88,31 @@ public class Level
 
 					if(distance<e.getR())
 					{
-						score.set(score.get()+e.getScore());
 						itor.remove();
+						//chance add upgrade
+						double dice=100*Math.random();
+						if(dice<progressUprate)
+						{
+							Upgrade u=Upgrade.progressUpgrade(e.getX(), e.getY(),color);
+							upgrades.add(u);
+							observableList.add(u.getCircle());
+						}
+						else if(dice<progressUprate+scoreUprate)
+						{
+							Upgrade u=Upgrade.scoreUpgrade(e.getX(), e.getY());
+							upgrades.add(u);
+							observableList.add(u.getCircle());
+						}
+						else if(dice<progressUprate+scoreUprate+powerUprate)
+						{
+							Upgrade u=Upgrade.powerUpgrade(e.getX(), e.getY());
+							upgrades.add(u);
+							observableList.add(u.getCircle());
+						}
 						itor2.remove();
-						progress.set(progress.get());
 						observableList.remove(b.getLine());
 						observableList.remove(e.getCircle());
+
 					}
 				}
 			}
@@ -105,6 +128,19 @@ public class Level
 					observableList.remove(e.getCircle());
 				}
 			}
+			//player upgrade check
+			for(Iterator<Upgrade> itor=upgrades.iterator();itor.hasNext();)
+			{
+				Upgrade u=itor.next();
+				if(u.isCollide(shooter))
+				{
+					shooter.powerInc(u.getPowerUp());
+					score.set(score.get()+u.getScoreUp());
+					progress.set(progress.get()+u.getProgressUp());
+					itor.remove();
+					observableList.remove(u.getCircle());
+				}
+			}
 			collCheckCounter=0;
 		}
 	}
@@ -115,11 +151,20 @@ public class Level
 		collisionPhase(observableList,score,shooter);
 		movePhase(shooter);
 		removeOutBound(observableList);
-		return(progress.get()==100);
+		upgradeTimeout(observableList);
+		return(progress.get()>=100);
 	}
 	public void upgradeTimeout(ObservableList<Node> observableList)
 	{
-		
+		for(Iterator<Upgrade> itor=upgrades.iterator();itor.hasNext();)
+		{
+			Upgrade u=itor.next();
+			if(u.timeOut())
+			{
+				itor.remove();
+				observableList.remove(u.getCircle());
+			}
+		}
 	}
 	public void removeOutBound(ObservableList<Node> observableList)
 	{
@@ -194,6 +239,12 @@ public class Level
 		{
 			Enemy b=itor.next();
 			observableList.remove(b.getCircle());
+			itor.remove();
+		}
+		for(Iterator<Upgrade> itor=upgrades.iterator();itor.hasNext(); )
+		{
+			Upgrade u=itor.next();
+			observableList.remove(u);
 			itor.remove();
 		}
 	}

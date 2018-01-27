@@ -111,6 +111,7 @@ public class Shooter extends Entity
 			temp=0;
 		else if(temp>MAX_POWER)
 			temp=MAX_POWER;
+		power.set(temp);
 		return;
 	}
 	public void setMouseX(double mouseX) {
