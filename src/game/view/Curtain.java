@@ -54,6 +54,7 @@ public class Curtain
 	}
 	public void start(Pane scene)
 	{
+		controller.globalStop();
 		close(scene);
 		CurtainHandler c=new CurtainHandler();
 		Timeline temp = new Timeline(
