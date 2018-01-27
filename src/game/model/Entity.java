@@ -23,9 +23,9 @@ public abstract class Entity
 	public Entity(double x,double y,double radius,Circle c)
 	{
 		this(x,y,radius);
-		bind(c);
+		bindCircle(c);
 	}
-	public void bind(Circle c)
+	public void bindCircle(Circle c)
 	{
 		c.centerXProperty().bind(p.getXProperty());
 		c.centerYProperty().bind(p.getYProperty());

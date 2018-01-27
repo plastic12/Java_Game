@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
@@ -15,11 +16,34 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="48.0" prefWidth="600.0">
                <children>
-                  <HBox layoutX="39.0" layoutY="12.0">
+                  <HBox layoutX="14.0" layoutY="17.0" spacing="5.0">
                      <children>
-                        <Label fx:id="healthLabel" layoutX="39.0" layoutY="12.0" text="Health" />
-                        <Label fx:id="scoreLabel" layoutX="87.0" layoutY="12.0" text="Score" />
+                        <Label layoutX="14.0" layoutY="17.0" text="Health" />
+                        <AnchorPane prefHeight="17.0" prefWidth="100.0">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="17.0" layoutX="21.0" layoutY="3.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <Rectangle fx:id="healthBar" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="17.0" layoutX="-29.0" layoutY="-88.0" stroke="BLACK" strokeType="INSIDE" width="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="170.0" layoutY="17.0" text="Power" />
+                        <AnchorPane prefHeight="17.0" prefWidth="100.0">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="17.0" layoutX="21.0" layoutY="3.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <Rectangle fx:id="powerBar" arcHeight="5.0" arcWidth="5.0" fill="#ffb11f" height="17.0" layoutX="-29.0" layoutY="-88.0" stroke="BLACK" strokeType="INSIDE" width="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="323.0" layoutY="17.0" text="Progress" />
+                        <AnchorPane prefHeight="17.0" prefWidth="100.0">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="17.0" layoutX="21.0" layoutY="3.0" stroke="BLACK" strokeType="INSIDE" width="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <Rectangle fx:id="progressBar" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="17.0" layoutX="-29.0" layoutY="-88.0" stroke="BLACK" strokeType="INSIDE" width="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                        <Label fx:id="scoreLabel" layoutX="484.0" layoutY="17.0" text="Score" />
                      </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                   </HBox>
                </children>
             </AnchorPane>

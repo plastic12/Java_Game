@@ -12,6 +12,7 @@ import game.model.Shooter;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -24,6 +25,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public class GameController 
@@ -32,7 +34,11 @@ public class GameController
 	@FXML
 	private Label scoreLabel;
 	@FXML
-	private Label healthLabel;
+	private Rectangle healthBar;
+	@FXML
+	private Rectangle powerBar;
+	@FXML
+	private Rectangle progressBar;
 	@FXML
 	private Circle shooterRender;
 	@FXML
@@ -46,6 +52,7 @@ public class GameController
 	private LinkedList<Bullet> bullets;
 	public static LinkedList<Enemy> enemies;
 	private Shooter shooter;
+	private SimpleIntegerProperty progress;
 	//system or counter
 	private double mouseX=0;
 	private double mouseY=0;
@@ -68,6 +75,7 @@ public class GameController
 	public void init(Pane scene) throws IOException
 	{
 		//init variable
+		progress=new SimpleIntegerProperty(0);
 		bullets=new LinkedList<Bullet>();
 		enemies=new LinkedList<Enemy>();
 		shooter=new Shooter();
@@ -81,8 +89,10 @@ public class GameController
 		curtain=new Curtain(this);
 		curtain.bind(scene);
 		//bind model and render
-		shooter.bind(shooterRender);
-		shooter.bindHealth(healthLabel);
+		shooter.bindCircle(shooterRender);
+		shooter.bindHealth(healthBar);
+		shooter.bindPower(powerBar);
+		progressBar.widthProperty().bind(progress);
 		shooter.bindScore(scoreLabel);
 		//add mouse monitor
 		gamePane.setOnMouseMoved(new EventHandler<MouseEvent>()

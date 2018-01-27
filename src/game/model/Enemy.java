@@ -14,7 +14,7 @@ public class Enemy extends Entity {
 	public Enemy() {
 		super(Math.random()*GameController.XBOUND, Math.random()*GameController.YBOUND, 10);
 		face = new Circle();
-		bind(face);
+		bindCircle(face);
 		direction = (int) (Math.random()*4);
 		
 		switch (direction) {
@@ -52,7 +52,7 @@ public class Enemy extends Entity {
 	{
 		super(x, y, 10);
 		face  = new Circle();
-		bind(face);
+		bindCircle(face);
 	}
 	public int getDamage() {
 		return damage;
