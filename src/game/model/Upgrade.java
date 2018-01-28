@@ -5,17 +5,17 @@ import javafx.scene.paint.Color;
 
 public class Upgrade extends Entity
 {
-	private static final int radius=5;
 	private int powerUp;
 	private int progressUp;
 	private int scoreUp;
 	private int timeOutCounter;
 	private final int timeOut=10;
 	//testing constant
-	public static final int progressMul=50;
+	public static final int progressMul=100;
 	private Upgrade(double x,double y)
 	{
-		super(x,y,radius);
+		super(x,y);
+		radius=5;
 		timeOutCounter=0;
 	}
 	public int getPowerUp() {

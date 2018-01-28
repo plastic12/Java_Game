@@ -26,4 +26,34 @@ public final class CircleFactory
 		c.setFill(color);
 		return c;
 	}
+	public static Circle getPCCircle()
+	{
+		Circle c=new Circle();
+		c.setFill(Color.RED);
+		return c;
+	}
+	public static Circle getNCCircle()
+	{
+		Circle c=new Circle();
+		c.setFill(Color.ORANGE);
+		return c;
+	}
+	public static Circle getRepliconeCircle()
+	{
+		Circle c=new Circle();
+		c.setFill(Color.YELLOW);
+		return c;
+	}
+	public static Circle getGigaCell()
+	{
+		Circle c=new Circle();
+		c.setFill(Color.GREEN);
+		return c;
+	}
+	public static Circle getCharger()
+	{
+		Circle c=new Circle();
+		c.setFill(Color.BLUE);
+		return c;
+	}
 }

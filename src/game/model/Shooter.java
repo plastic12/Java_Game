@@ -16,7 +16,7 @@ public class Shooter extends Entity
 	//init value
 	public static final double INIT_X=300;
 	public static final double INIT_Y=250;
-	public static final double INIT_R=10;
+	private static final double INIT_R=10;
 	//constant
 	public static final int MAX_HEALTH=100;
 	public static final int MAX_POWER=100;
@@ -36,7 +36,8 @@ public class Shooter extends Entity
 	public static final double shootfreq=2;
 	public Shooter()
 	{
-		super(INIT_X,INIT_Y,INIT_R);
+		super(INIT_X,INIT_Y);
+		radius=INIT_R;
 		health=new SimpleIntegerProperty(MAX_HEALTH);
 		power=new SimpleIntegerProperty(0);
 		xVelocity=0;
@@ -122,11 +123,15 @@ public class Shooter extends Entity
 	}
 	private Bullet addBullet()
 	{
-		return new Bullet(getX(),getY(),mouseX,mouseY);
+		return new Bullet(getX(),getY(),mouseX,mouseY,getDamage());
 		/*
 		bullets.add(b);
 		gamePane.getChildren().add(b.getLine());
 		*/
+	}
+	public int getDamage()
+	{
+		return 10+power.get()*10/100;
 	}
 	public Bullet shoot()
 	{

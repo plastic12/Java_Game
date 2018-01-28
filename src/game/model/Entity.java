@@ -8,31 +8,24 @@ import javafx.scene.shape.Circle;
 public abstract class Entity 
 {
 	protected Point p;
-	private SimpleDoubleProperty radius;
+	protected double radius;
 	private Circle circle;
 	protected double xVelocity;
 	protected double yVelocity;
 	public Entity()
 	{
 		p=new Point();
-		radius=new SimpleDoubleProperty();
 	}
-	public Entity(double x,double y,double radius)
+	public Entity(double x,double y)
 	{
-		p=new Point(x,y);this.radius=new SimpleDoubleProperty(radius);
-	}
-	public Entity(double x,double y,double radius,Circle c)
-	{
-		this(x,y,radius);
-		circle=c;
-		bindCircle(c);
+		p=new Point(x,y);
 	}
 	public void bindCircle(Circle c)
 	{
 		circle=c;
 		c.centerXProperty().bind(p.getXProperty());
 		c.centerYProperty().bind(p.getYProperty());
-		c.radiusProperty().bind(radius);
+		c.setRadius(radius);
 	}
 	public Circle getCircle() {return circle;}
 	public void move()
@@ -42,9 +35,9 @@ public abstract class Entity
 	}
 	public boolean isCollide(Entity e)
 	{
-		return (Distance.getDistance(p.getX(), p.getY(), e.getX(), e.getY())<(radius.get()+e.getR()));
+		return (Distance.getDistance(p.getX(), p.getY(), e.getX(), e.getY())<(radius+e.getR()));
 	}
 	public double getX(){return p.getX();}
 	public double getY() {return p.getY();}
-	public double getR() {return radius.get();}
+	public double getR() {return radius;}
 }

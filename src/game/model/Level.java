@@ -8,68 +8,130 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 public class Level 
 {
-	private Color color;
-	private String prompt;
+	protected Color color;
+	protected String prompt;
 	private int enemyCounter=0;
 	private int collCheckCounter=0;
 	private SimpleIntegerProperty progress;
 	private LinkedList<Bullet> bullets;
 	private LinkedList<Enemy> enemies;
 	private LinkedList<Upgrade> upgrades;
+	protected int[] enemyRate;
 	public static final int LEVELCOUNT=8;
 	public static final int enemyfreq=1;
 	public static final int collisionCheckfreq=50;
 	public static final int powerUprate=20;
 	public static final int scoreUprate=20;
 	public static final int progressUprate=20;
+	private static int[][] levelsetup= {
+			{50,50,50,50,50,50,50},
+			{30,60,60,60,60,60,60},
+			{25,45,70,70,70,70,70},
+			{20,30,55,80,80,80,80},
+			{10,30,40,65,90,90,90},
+			{10,20,40,50,60,100,100},
+			{5,15,20,40,60,80,100}};
+	private static String[] levelPrompt= {
+			"Welcome!\n Here is the world of black and white",
+			"level: 2",
+			"level: 3",
+			"level: 4",
+			"level: 5",
+			"level: 6",
+			"level: 7"
+	};
+	private static Color[] levelColor= {
+			Color.RED,
+			Color.ORANGE,
+			Color.YELLOW,
+			Color.GREEN,
+			Color.BLUE,
+			Color.INDIGO,
+			Color.web("#8B00FF")
+	};
 	public static Level initLevel(int level)
 	{
-		switch(level)
-		{
-		case 1:
-			return new Level("Welcome!\n Here is the world of black and white",Color.RED);
-		case 2:
-			return new Level("level: 2",Color.ORANGE); 
-		case 3:
-			return new Level("level: 3",Color.YELLOW);
-		case 4:
-			return new Level("level: 4",Color.GREEN);
-		case 5:
-			return new Level("level: 5",Color.BLUE);
-		case 6:
-			return new Level("level: 6",Color.INDIGO);
-		case 7:
-			return new Level("level: 7",Color.web("#8B00FF"));
-		case 8:
+		if(level<7)
+			return new Level(level);
+		else if(level==7)
 			return new BossLevel();
-		default:
-			System.out.println("The invalid level number");
+		else
+			//TODO
 			return null;
+	}
+	public void setupEnemy(int level)
+	{
+		
+	}
+	public void addEnemy(ObservableList<Node> observableList,Shooter shooter)
+	{
+		double dice=Math.random()*100;
+		Enemy e=null;
+		if(dice<enemyRate[0])
+			e=new PC();
+		else if(dice<enemyRate[1])
+			e=new NC();
+		else if(dice<enemyRate[2])
+			e=new Replicone();
+		else if(dice<enemyRate[3])
+			e=new GigaCell(shooter);
+		else if(dice<enemyRate[4])
+			e=new Charger(shooter);
+		else if(dice<enemyRate[5])
+			e=new Swinger();
+		else if(dice<enemyRate[6])
+			e=new Ghost(shooter);
+		if(e!=null)
+		{
+			enemies.add(e);
+			observableList.add(e.getCircle());
 		}
 	}
-	public void addEnemy(ObservableList<Node> observableList)
+	protected Level(int level)
 	{
-		Enemy e=new Enemy();
-		enemies.add(e);
-		observableList.add(e.getCircle());
+		this();
+		color=levelColor[level];
+		prompt=levelPrompt[level];
+		enemyRate=levelsetup[level];
 	}
-	protected Level(String prompt,Color color)
+	protected Level()
 	{
-		this.color=color;
 		progress=new SimpleIntegerProperty(0);
 		bullets=new LinkedList<Bullet>();
 		enemies=new LinkedList<Enemy>();
 		upgrades=new LinkedList<Upgrade>();
-		this.prompt=prompt;
 	}
 	public void bindProgress(Rectangle progressBar)
 	{
 		progressBar.widthProperty().bind(progress);
 		progressBar.setFill(color);
+	}
+	public void genUpgrade(double x,double y,ObservableList<Node> observableList)
+	{
+		double dice=100*Math.random();
+		if(dice<progressUprate)
+		{
+			Upgrade u=Upgrade.progressUpgrade(x, y,color);
+			upgrades.add(u);
+			observableList.add(u.getCircle());
+		}
+		else if(dice<progressUprate+scoreUprate)
+		{
+			Upgrade u=Upgrade.scoreUpgrade(x, y);
+			upgrades.add(u);
+			observableList.add(u.getCircle());
+		}
+		else if(dice<progressUprate+scoreUprate+powerUprate)
+		{
+			Upgrade u=Upgrade.powerUpgrade(x, y);
+			upgrades.add(u);
+			observableList.add(u.getCircle());
+		}
 	}
 	public void collisionPhase(ObservableList<Node> observableList, SimpleIntegerProperty score, Shooter shooter)
 	{
@@ -89,29 +151,16 @@ public class Level
 					if(distance<e.getR())
 					{
 						itor.remove();
-						//chance add upgrade
-						double dice=100*Math.random();
-						if(dice<progressUprate)
-						{
-							Upgrade u=Upgrade.progressUpgrade(e.getX(), e.getY(),color);
-							upgrades.add(u);
-							observableList.add(u.getCircle());
-						}
-						else if(dice<progressUprate+scoreUprate)
-						{
-							Upgrade u=Upgrade.scoreUpgrade(e.getX(), e.getY());
-							upgrades.add(u);
-							observableList.add(u.getCircle());
-						}
-						else if(dice<progressUprate+scoreUprate+powerUprate)
-						{
-							Upgrade u=Upgrade.powerUpgrade(e.getX(), e.getY());
-							upgrades.add(u);
-							observableList.add(u.getCircle());
-						}
-						itor2.remove();
 						observableList.remove(b.getLine());
-						observableList.remove(e.getCircle());
+						e.getShot(b);
+						if(e.isDead())
+						{
+							e.dead();
+							genUpgrade(e.getX(),e.getY(),observableList);
+							//chance add upgrade
+							itor2.remove();
+							observableList.remove(e.getCircle());
+						}
 
 					}
 				}
@@ -123,7 +172,9 @@ public class Level
 				if(e.isCollide(shooter))
 				{
 					shooter.healthInc(-e.getDamage());
-					score.set(score.get()+e.getScore());
+					e.setDead();
+					e.dead();
+					genUpgrade(e.getX(),e.getY(),observableList);
 					itor2.remove();
 					observableList.remove(e.getCircle());
 				}
@@ -146,11 +197,11 @@ public class Level
 	}
 	public boolean loop(ObservableList<Node> observableList, SimpleIntegerProperty score, Shooter shooter)
 	{
-		genEnemy(observableList);
+		genEnemy(observableList,shooter);
 		genBullet(observableList,shooter);
 		collisionPhase(observableList,score,shooter);
 		movePhase(shooter);
-		removeOutBound(observableList);
+		//removeOutBound(observableList);
 		upgradeTimeout(observableList);
 		return(progress.get()>=100);
 	}
@@ -208,12 +259,12 @@ public class Level
 		shooter.accelerate();
 		shooter.move();
 	}
-	public void genEnemy(ObservableList<Node> observableList)
+	public void genEnemy(ObservableList<Node> observableList,Shooter shooter)
 	{
 		enemyCounter++;
 		if(enemyCounter>=Main.FPS/enemyfreq)
 		{
-			addEnemy(observableList);
+			addEnemy(observableList,shooter);
 			enemyCounter=0;
 		}
 	}
@@ -244,7 +295,7 @@ public class Level
 		for(Iterator<Upgrade> itor=upgrades.iterator();itor.hasNext(); )
 		{
 			Upgrade u=itor.next();
-			observableList.remove(u);
+			observableList.remove(u.getCircle());
 			itor.remove();
 		}
 	}

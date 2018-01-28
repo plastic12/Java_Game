@@ -6,8 +6,10 @@ public class BossLevel extends Level
 {
 
 	public BossLevel() {
-		super("boss",Color.BLACK);
-		// TODO Auto-generated constructor stub
+		super();
+		color=Color.BLACK;
+		prompt="Boss Level";
+		enemyRate= new int[] {0,0,0,0,0,0,0};
 	}
 
 }
