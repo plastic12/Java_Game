@@ -28,8 +28,20 @@ public class StartController {
     	Main.startGame();
     }
     
-    @FXML
-    public void goMenu(MouseEvent e) throws IOException {
+   @FXML
+    public void goLeaderboard(MouseEvent e) throws IOException {
     	Main.viewLeaderboard();
+    }
+    
+    @FXML
+    void mouseIn(MouseEvent e) throws IOException {
+    	Label temp = (Label) e.getSource();
+    	temp.setEffect(new DropShadow());
+    }
+    
+    @FXML
+    void mouseOut(MouseEvent e) throws IOException {
+    	Label temp = (Label) e.getSource();
+    	temp.setEffect(null);
     }
 }
