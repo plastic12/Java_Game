@@ -18,11 +18,11 @@
                   <Image url="@background.png" />
                </image>
             </ImageView>
-            <Label fx:id="startBtn" alignment="CENTER" layoutX="256.0" layoutY="294.0" onMouseClicked="#startGame" text="Start">
+            <Label fx:id="startBtn" alignment="CENTER" layoutX="256.0" layoutY="294.0" onMouseClicked="#startGame" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Start">
                <font>
                   <Font size="40.0" />
                </font></Label>
-            <Label fx:id="Leaderboard" alignment="CENTER" layoutX="180.0" layoutY="374.0" onMouseClicked="#goMenu" prefHeight="14.0" prefWidth="243.0" text="Leaderboard">
+            <Label fx:id="Leaderboard" alignment="CENTER" layoutX="180.0" layoutY="374.0" onMouseClicked="#goLeaderboard" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" prefHeight="14.0" prefWidth="243.0" text="Leaderboard">
                <font>
                   <Font size="40.0" />
                </font></Label>
