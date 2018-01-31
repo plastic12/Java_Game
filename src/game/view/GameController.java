@@ -114,19 +114,6 @@ public class GameController
 		//main loop and animation
 		EventHandler<ActionEvent> eventHandler = e -> 
 		{
-			/*
-			//gen enemy
-			genEnemy();
-			//gen bullet
-			genBullet();
-			//check collision
-			collisionPhase();
-			//move
-			movePhase();
-			//remove outBound object
-			removeOutBound();
-			//check dead
-				*/
 			boolean levelUp=level.loop(score,shooter);
 			//update render
 			gamePane.getChildren().retainAll(bg);

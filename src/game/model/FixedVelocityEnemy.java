@@ -6,8 +6,13 @@ public abstract class FixedVelocityEnemy extends Enemy
 {
 	public FixedVelocityEnemy()
 	{
-
+		
 	}
+	public FixedVelocityEnemy(double d, double e) {
+		super(d,e);
+		// TODO Auto-generated constructor stub
+	}
+
 	protected void setVelocity(int direction)
 	{
 		switch (direction) {

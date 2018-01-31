@@ -2,6 +2,7 @@ package game.model;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 import game.Main;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -155,7 +156,7 @@ public class Level
 			{
 				Bullet b=itor.next();
 
-				for(Iterator<Enemy> itor2=enemies.iterator();itor2.hasNext();)
+				for(ListIterator<Enemy> itor2=enemies.listIterator();itor2.hasNext();)
 				{
 					Enemy e=itor2.next();
 					if(e.getShot(b))
@@ -164,9 +165,15 @@ public class Level
 						if(e.isDead())
 						{
 							e.dead();
-							genUpgrade(e.getX(),e.getY());
-							//chance add upgrade
 							itor2.remove();
+							if(e instanceof Replicone)
+							{
+								for(int i=0;i<4;i++)
+									itor2.add(new Split(e.getX(),e.getY(),i));
+							}
+							if(!(e instanceof Split))
+								genUpgrade(e.getX(),e.getY());
+							//chance add upgrade
 						}
 					}
 				}

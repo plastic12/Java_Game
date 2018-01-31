@@ -70,7 +70,7 @@ public class Main extends Application{
 				gameController.releaseHandler(e);
 			});
 			primaryStage.setScene(scene);
-			gameController.start(6);
+			gameController.start(2);
 			bgm.game();
 		}
 	public static void gameOver(int score) throws IOException
