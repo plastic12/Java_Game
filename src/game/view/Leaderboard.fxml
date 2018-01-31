@@ -21,7 +21,7 @@
                <font>
                   <Font size="50.0" />
                </font></Label>
-            <Label fx:id="menu" layoutX="344.0" layoutY="485.0" onMouseClicked="#backMenu" text="Back to menu">
+            <Label fx:id="menu" layoutX="344.0" layoutY="485.0" onMouseClicked="#backMenu" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Back to menu">
                <font>
                   <Font size="35.0" />
                </font>
