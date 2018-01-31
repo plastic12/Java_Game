@@ -127,7 +127,12 @@ public class GameController
 			removeOutBound();
 			//check dead
 				*/
-			boolean levelUp=level.loop(gamePane.getChildren(),score,shooter);
+			boolean levelUp=level.loop(score,shooter);
+			//update render
+			gamePane.getChildren().retainAll(bg);
+			gamePane.getChildren().add(shooter.getCircle());
+			level.render(gamePane.getChildren());
+			//check dead and level up
 			if(isDead())
 				try {
 					quitGame();

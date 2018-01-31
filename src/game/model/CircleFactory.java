@@ -56,4 +56,16 @@ public final class CircleFactory
 		c.setFill(Color.BLUE);
 		return c;
 	}
+	public static Circle getSwinger()
+	{
+		Circle c=new Circle();
+		c.setFill(Color.INDIGO);
+		return c;
+	}
+	public static Circle getGhost()
+	{
+		Circle c=new Circle();
+		c.setFill(Color.web("#8B00FF"));
+		return c;
+	}
 }

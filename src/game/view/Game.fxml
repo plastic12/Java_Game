@@ -49,7 +49,7 @@
             </AnchorPane>
           <AnchorPane fx:id="gamePane" minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="600.0">
                <children>
-                  <ImageView fitHeight="500.0" fitWidth="600.0" pickOnBounds="true">
+                  <ImageView fx:id="bg" fitHeight="500.0" fitWidth="600.0" pickOnBounds="true">
                      <image>
                         <Image url="@background.png" />
                      </image>

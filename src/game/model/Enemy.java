@@ -62,7 +62,17 @@ public abstract class Enemy extends Entity {
 	public int getDamage() {
 		return damage;
 	}
-	public void getShot(Bullet b) {life-=b.getDamage();}
+	public boolean getShot(Bullet b) 
+	{
+		double distance=b.getDistance(this);
+
+		if(distance<getR())
+		{
+			life-=b.getDamage();
+			return true;
+		}
+		return false;
+	}
 	public boolean isDead() {return (life<=0);}
 	public boolean inBound()
 	{

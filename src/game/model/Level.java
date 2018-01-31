@@ -66,9 +66,9 @@ public class Level
 	}
 	public void setupEnemy(int level)
 	{
-		
+
 	}
-	public void addEnemy(ObservableList<Node> observableList,Shooter shooter)
+	public void addEnemy(Shooter shooter)
 	{
 		double dice=Math.random()*100;
 		Enemy e=null;
@@ -89,7 +89,6 @@ public class Level
 		if(e!=null)
 		{
 			enemies.add(e);
-			observableList.add(e.getCircle());
 		}
 	}
 	protected Level(int level)
@@ -106,34 +105,47 @@ public class Level
 		enemies=new LinkedList<Enemy>();
 		upgrades=new LinkedList<Upgrade>();
 	}
+	public void render(ObservableList<Node> observableList)
+	{
+		for(Iterator<Bullet> itor=bullets.iterator();itor.hasNext();)
+		{
+			observableList.add(itor.next().getLine());
+		}
+		//remove Enemy
+		for(Iterator<Enemy> itor=enemies.iterator();itor.hasNext();)
+		{
+			observableList.add(itor.next().getCircle());
+		}
+		for(Iterator<Upgrade> itor=upgrades.iterator();itor.hasNext(); )
+		{
+			observableList.add(itor.next().getCircle());
+		}
+	}
 	public void bindProgress(Rectangle progressBar)
 	{
 		progressBar.widthProperty().bind(progress);
 		progressBar.setFill(color);
 	}
-	public void genUpgrade(double x,double y,ObservableList<Node> observableList)
+	public void genUpgrade(double x,double y)
 	{
 		double dice=100*Math.random();
 		if(dice<progressUprate)
 		{
 			Upgrade u=Upgrade.progressUpgrade(x, y,color);
 			upgrades.add(u);
-			observableList.add(u.getCircle());
 		}
 		else if(dice<progressUprate+scoreUprate)
 		{
 			Upgrade u=Upgrade.scoreUpgrade(x, y);
 			upgrades.add(u);
-			observableList.add(u.getCircle());
 		}
 		else if(dice<progressUprate+scoreUprate+powerUprate)
 		{
 			Upgrade u=Upgrade.powerUpgrade(x, y);
 			upgrades.add(u);
-			observableList.add(u.getCircle());
 		}
 	}
-	public void collisionPhase(ObservableList<Node> observableList, SimpleIntegerProperty score, Shooter shooter)
+	public void collisionPhase(SimpleIntegerProperty score, Shooter shooter)
 	{
 		collCheckCounter++;
 		if(collCheckCounter>=Main.FPS/collisionCheckfreq)
@@ -146,22 +158,16 @@ public class Level
 				for(Iterator<Enemy> itor2=enemies.iterator();itor2.hasNext();)
 				{
 					Enemy e=itor2.next();
-					double distance=b.getDistance(e);
-
-					if(distance<e.getR())
+					if(e.getShot(b))
 					{
 						itor.remove();
-						observableList.remove(b.getLine());
-						e.getShot(b);
 						if(e.isDead())
 						{
 							e.dead();
-							genUpgrade(e.getX(),e.getY(),observableList);
+							genUpgrade(e.getX(),e.getY());
 							//chance add upgrade
 							itor2.remove();
-							observableList.remove(e.getCircle());
 						}
-
 					}
 				}
 			}
@@ -174,9 +180,8 @@ public class Level
 					shooter.healthInc(-e.getDamage());
 					e.setDead();
 					e.dead();
-					genUpgrade(e.getX(),e.getY(),observableList);
+					genUpgrade(e.getX(),e.getY());
 					itor2.remove();
-					observableList.remove(e.getCircle());
 				}
 			}
 			//player upgrade check
@@ -189,23 +194,22 @@ public class Level
 					score.set(score.get()+u.getScoreUp());
 					progress.set(progress.get()+u.getProgressUp());
 					itor.remove();
-					observableList.remove(u.getCircle());
 				}
 			}
 			collCheckCounter=0;
 		}
 	}
-	public boolean loop(ObservableList<Node> observableList, SimpleIntegerProperty score, Shooter shooter)
+	public boolean loop(SimpleIntegerProperty score, Shooter shooter)
 	{
-		genEnemy(observableList,shooter);
-		genBullet(observableList,shooter);
-		collisionPhase(observableList,score,shooter);
+		genEnemy(shooter);
+		genBullet(shooter);
+		collisionPhase(score,shooter);
 		movePhase(shooter);
 		//removeOutBound(observableList);
-		upgradeTimeout(observableList);
+		upgradeTimeout();
 		return(progress.get()>=100);
 	}
-	public void upgradeTimeout(ObservableList<Node> observableList)
+	public void upgradeTimeout()
 	{
 		for(Iterator<Upgrade> itor=upgrades.iterator();itor.hasNext();)
 		{
@@ -213,7 +217,6 @@ public class Level
 			if(u.timeOut())
 			{
 				itor.remove();
-				observableList.remove(u.getCircle());
 			}
 		}
 	}
@@ -259,22 +262,21 @@ public class Level
 		shooter.accelerate();
 		shooter.move();
 	}
-	public void genEnemy(ObservableList<Node> observableList,Shooter shooter)
+	public void genEnemy(Shooter shooter)
 	{
 		enemyCounter++;
 		if(enemyCounter>=Main.FPS/enemyfreq)
 		{
-			addEnemy(observableList,shooter);
+			addEnemy(shooter);
 			enemyCounter=0;
 		}
 	}
-	public void genBullet(ObservableList<Node> observableList,Shooter shooter)
+	public void genBullet(Shooter shooter)
 	{
 		Bullet b=shooter.shoot();
 		if(b!=null)
 		{
 			bullets.add(b);
-			observableList.add(b.getLine());
 		}
 	}
 	public void cleanUp(ObservableList<Node> observableList)

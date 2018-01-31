@@ -9,7 +9,7 @@ public abstract class Entity
 {
 	protected Point p;
 	protected double radius;
-	private Circle circle;
+	protected Circle circle;
 	protected double xVelocity;
 	protected double yVelocity;
 	public Entity()
