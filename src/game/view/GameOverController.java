@@ -25,4 +25,16 @@ public class GameOverController
     {
     		Main.startGame();
     }
+	
+    @FXML
+    void mouseIn(MouseEvent e) throws IOException {
+    	Label temp = (Label) e.getSource();
+    	temp.setEffect(new DropShadow());
+    }
+    
+    @FXML
+    void mouseOut(MouseEvent e) throws IOException {
+    	Label temp = (Label) e.getSource();
+    	temp.setEffect(null);
+    }
 }
