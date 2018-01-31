@@ -30,12 +30,12 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label fx:id="restart" alignment="CENTER" layoutX="253.0" layoutY="336.0" onMouseClicked="#restart" text="Restart">
+            <Label fx:id="restart" alignment="CENTER" layoutX="253.0" layoutY="336.0" onMouseClicked="#restart" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Restart">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <Label fx:id="home" alignment="CENTER" layoutX="215.0" layoutY="394.0" onMouseClicked="#menu" text="Back to menu">
+            <Label fx:id="home" alignment="CENTER" layoutX="215.0" layoutY="394.0" onMouseClicked="#menu" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Back to menu">
                <font>
                   <Font size="30.0" />
                </font>
