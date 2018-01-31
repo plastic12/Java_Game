@@ -115,7 +115,11 @@ public class Level
 		//remove Enemy
 		for(Iterator<Enemy> itor=enemies.iterator();itor.hasNext();)
 		{
-			observableList.add(itor.next().getCircle());
+			Enemy e=itor.next();
+			if(e instanceof Swinger)
+				((Swinger)e).render(observableList);
+			else
+				observableList.add(e.getCircle());
 		}
 		for(Iterator<Upgrade> itor=upgrades.iterator();itor.hasNext(); )
 		{
