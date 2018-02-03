@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.view.OptionController">
+   <children>
+      <Pane prefHeight="560.0" prefWidth="602.0">
+         <children>
+            <ImageView fitHeight="560.0" fitWidth="602.0" pickOnBounds="true">
+               <image>
+                  <Image url="@background.png" />
+               </image>
+            </ImageView>
+            <CheckBox fx:id="music" layoutX="206.0" layoutY="88.0" mnemonicParsing="false" text="Music">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </CheckBox>
+            <CheckBox fx:id="dialog" layoutX="206.0" layoutY="177.0" mnemonicParsing="false" text="Dialog">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </CheckBox>
+            <Label layoutX="246.0" layoutY="316.0" onMouseClicked="#backMenu" text="Back">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+            <CheckBox fx:id="dialog1" layoutX="206.0" layoutY="253.0" mnemonicParsing="false" text="Color">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </CheckBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

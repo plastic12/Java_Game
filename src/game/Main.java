@@ -8,6 +8,7 @@ import java.io.IOException;
 import game.view.GameController;
 import game.view.GameOverController;
 import game.view.LeaderboardController;
+import game.view.OptionController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -53,6 +54,14 @@ public class Main extends Application{
 		bgm.menu();
 		primaryStage.setScene(StartScene);
 	}
+	public static void option() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("view/Option.fxml"));
+		Pane pane = (Pane) loader.load();
+		OptionController controller=loader.getController();
+		Scene scene = new Scene(pane);
+		primaryStage.setScene(scene);
+	}
 	
 	public static void startGame() throws IOException {
 			FXMLLoader loader = new FXMLLoader();
@@ -80,8 +89,6 @@ public class Main extends Application{
 		loader.setLocation(Main.class.getResource("view/GameOver.fxml"));
 		Pane pane = (Pane) loader.load();
 		GameOverController controller=loader.getController();
-		if(controller==null)
-			System.out.println("fail");
 		controller.init(score);
 		lc.addScore(score);
 		Scene scene = new Scene(pane);

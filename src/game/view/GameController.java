@@ -131,7 +131,16 @@ public class GameController
 			if(levelUp)
 			{
 				cleanUp();
-				start(levelNo+1);
+				if(levelNo!=6)
+				{
+					start(levelNo+1);
+				} else
+					try {
+						Main.gameOver(score.get());
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 			}
 		};
 		loop = new Timeline(
