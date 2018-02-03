@@ -2,6 +2,7 @@ package game;
 
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 
 import static java.nio.file.StandardOpenOption.CREATE;
@@ -46,10 +47,6 @@ public class Main extends Application{
 	public void start(Stage primaryStage) {
 		//read config
 		readConfig();
-		System.out.println(music);
-		System.out.println(curtain);
-		System.out.println(win);
-		System.out.println(color);
 		try {
 			this.primaryStage = primaryStage;
 			menu();

@@ -3,6 +3,7 @@ package game.view;
 import java.io.IOException;
 
 import game.Main;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -48,5 +49,10 @@ public class StartController {
     void mouseOut(MouseEvent e) throws IOException {
     	Label temp = (Label) e.getSource();
     	temp.setEffect(null);
+    }
+    @FXML
+    public void exitBtn(MouseEvent e)
+    {
+    		Platform.exit();
     }
 }
