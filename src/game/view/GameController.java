@@ -62,7 +62,6 @@ public class GameController
 	public static final double XBOUND=600;
 	public static final double YBOUND=500;
 	//toggle testing constant
-	public static final boolean USECURTAIN=false;
 	
 	public GameController() {
 	}
@@ -136,6 +135,13 @@ public class GameController
 					start(levelNo+1);
 				} else
 					try {
+						if(!Main.win)
+						{
+							Main.win=true;
+							Main.writeConfig();
+						}
+						//TODO game Win panel, function
+						quitGame();
 						Main.gameOver(score.get());
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
@@ -230,7 +236,7 @@ public class GameController
 		this.level=Level.initLevel(level);
 		levelNo=level;
 		loop.play();
-		if(USECURTAIN)
+		if(Main.curtain)
 		{
 			curtain.setText(this.level.getPrompt());
 			curtain.start(scenePane);

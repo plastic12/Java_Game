@@ -33,6 +33,10 @@ public class StartController {
     public void goLeaderboard(MouseEvent e) throws IOException {
     	Main.viewLeaderboard();
     }
+   @FXML
+   public void goOption(MouseEvent e)throws IOException{
+	   Main.option();
+   }
     
     @FXML
     void mouseIn(MouseEvent e) throws IOException {

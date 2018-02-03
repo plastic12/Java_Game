@@ -31,7 +31,7 @@
                   <Font size="40.0" />
                </font>
             </Label>
-            <CheckBox fx:id="dialog1" layoutX="206.0" layoutY="253.0" mnemonicParsing="false" text="Color">
+            <CheckBox fx:id="color" layoutX="206.0" layoutY="253.0" mnemonicParsing="false" text="Color">
                <font>
                   <Font size="40.0" />
                </font>
