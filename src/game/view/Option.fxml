@@ -17,14 +17,14 @@
                </image>
             </ImageView>
             <CheckBox fx:id="music" layoutX="206.0" layoutY="88.0" mnemonicParsing="false" text="Music">
-               <font>
-                  <Font size="40.0" />
-               </font>
+              <font>
+            <Font name="Agency FB" size="24.0" />
+         </font></Label>
             </CheckBox>
             <CheckBox fx:id="dialog" layoutX="206.0" layoutY="177.0" mnemonicParsing="false" text="Dialog">
-               <font>
-                  <Font size="40.0" />
-               </font>
+              <font>
+            <Font name="Agency FB" size="24.0" />
+         </font></Label>
             </CheckBox>
             <Label layoutX="246.0" layoutY="334.0" onMouseClicked="#backMenu" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Back">
                <font>
@@ -33,7 +33,7 @@
             </Label>
             <CheckBox fx:id="color" layoutX="206.0" layoutY="253.0" mnemonicParsing="false" text="Color">
                <font>
-                  <Font size="40.0" />
+                  <Font name="Agency FB" size="40.0" />
                </font>
             </CheckBox>
          </children>
