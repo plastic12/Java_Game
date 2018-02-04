@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.view.GameWinController">
+   <children>
+      <ImageView fitHeight="560.0" fitWidth="602.0" pickOnBounds="true">
+         <image>
+            <Image url="@background.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="39.0" layoutY="109.0" text="Congratrations!&#10;You have finished the game" wrapText="true">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="237.0" layoutY="239.0" prefHeight="29.0" prefWidth="76.0" text="Score:">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="scoreLabel" layoutX="326.0" layoutY="239.0" prefHeight="29.0" prefWidth="91.0" text="1234">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="250.0" layoutY="392.0" onMouseClicked="#restart" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Restart">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="204.0" layoutY="443.0" onMouseClicked="#menu" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Back to menu">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="noteLabel" layoutX="89.0" layoutY="292.0" text="You have unlock the color option,&#10;Check option in menu." textFill="#ee0000" visible="false">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

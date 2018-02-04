@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import game.view.GameController;
 import game.view.GameOverController;
+import game.view.GameWinController;
 import game.view.LeaderboardController;
 import game.view.OptionController;
 import javafx.animation.KeyFrame;
@@ -108,6 +109,18 @@ public class Main extends Application{
 		loader.setLocation(Main.class.getResource("view/GameOver.fxml"));
 		Pane pane = (Pane) loader.load();
 		GameOverController controller=loader.getController();
+		controller.init(score);
+		lc.addScore(score);
+		Scene scene = new Scene(pane);
+		primaryStage.setScene(scene);
+	}
+	public static void gameWin(int score) throws IOException
+	{
+		//TODO gameWin
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("view/GameWin.fxml"));
+		Pane pane = (Pane) loader.load();
+		GameWinController controller=loader.getController();
 		controller.init(score);
 		lc.addScore(score);
 		Scene scene = new Scene(pane);

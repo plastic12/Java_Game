@@ -8,6 +8,8 @@ import game.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 
 public class OptionController implements Initializable
@@ -42,6 +44,16 @@ public class OptionController implements Initializable
 			Main.color=false;
 		}
 	}
-	
+    @FXML
+    void mouseIn(MouseEvent e) throws IOException {
+    	Label temp = (Label) e.getSource();
+    	temp.setEffect(new DropShadow());
+    }
+    
+    @FXML
+    void mouseOut(MouseEvent e) throws IOException {
+    	Label temp = (Label) e.getSource();
+    	temp.setEffect(null);
+    }
 	
 }

@@ -26,7 +26,7 @@
                   <Font size="40.0" />
                </font>
             </CheckBox>
-            <Label layoutX="246.0" layoutY="316.0" onMouseClicked="#backMenu" text="Back">
+            <Label layoutX="246.0" layoutY="334.0" onMouseClicked="#backMenu" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Back">
                <font>
                   <Font size="40.0" />
                </font>

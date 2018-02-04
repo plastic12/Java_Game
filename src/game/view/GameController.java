@@ -135,14 +135,9 @@ public class GameController
 					start(levelNo+1);
 				} else
 					try {
-						if(!Main.win)
-						{
-							Main.win=true;
-							Main.writeConfig();
-						}
 						//TODO game Win panel, function
 						quitGame();
-						Main.gameOver(score.get());
+						Main.gameWin(score.get());
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
