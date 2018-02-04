@@ -17,18 +17,18 @@
                   <Image url="@background.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="164.0" layoutY="33.0" prefHeight="79.0" prefWidth="275.0" text="High Score">
+            <Label alignment="CENTER" layoutX="176.0" layoutY="32.0" prefHeight="79.0" prefWidth="275.0" text="High Score">
                <font>
-                  <Font name="Agency FB" size="40.0" />
+                  <Font name="Agency FB" size="50.0" />
                </font></Label>
-            <Label fx:id="menu" layoutX="344.0" layoutY="485.0" onMouseClicked="#backMenu" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Back to menu">
+            <Label fx:id="menu" layoutX="393.0" layoutY="471.0" onMouseClicked="#backMenu" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Back to menu">
                <font>
                   <Font name="Agency FB" size="40.0" />
                </font>
             </Label>
             <Label fx:id="firstScore" layoutX="140.0" layoutY="148.0" text="1. 0">
                <font>
-                  <Font name="Agency FB" size="40.0" />
+                  <Font name="Agency FB" size="48.0" />
                </font>
                <effect>
                   <Reflection />
@@ -36,7 +36,7 @@
             </Label>
             <Label fx:id="secondScore" layoutX="257.0" layoutY="246.0" text="2. 0">
                <font>
-                  <Font name="Agency FB" size="40.0" />
+                  <Font name="Agency FB" size="48.0" />
                </font>
                <effect>
                   <Reflection />
@@ -44,7 +44,7 @@
             </Label>
             <Label fx:id="thirdScore" layoutX="377.0" layoutY="352.0" text="3. 0">
                <font>
-                  <Font name="Agency FB" size="40.0" />
+                  <Font name="Agency FB" size="50.0" />
                </font>
                <effect>
                   <Reflection />
