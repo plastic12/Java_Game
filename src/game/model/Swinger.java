@@ -34,6 +34,7 @@ public class Swinger extends FixedVelocityEnemy
 		super.move();
 		angle+=angularV/Main.FPS;
 		updateOrbit();
+		circle.setRotate(-angle);
 
 	}
 	private void updateOrbit()
@@ -94,11 +95,13 @@ public class Swinger extends FixedVelocityEnemy
 	}
 	public void render(ObservableList<Node> observableList)
 	{
+		
 		if(s1!=null)
-			observableList.add(s1.getCircle());
+			s1.render(observableList);
 		if(s2!=null)
-			observableList.add(s2.getCircle());
-		observableList.add(getCircle());
+			s2.render(observableList);
+			
+		super.render(observableList);
 	}
 
 }

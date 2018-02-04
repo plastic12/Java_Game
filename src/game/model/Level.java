@@ -121,11 +121,11 @@ public class Level
 			if(e instanceof Swinger)
 				((Swinger)e).render(observableList);
 			else
-				observableList.add(e.getCircle());
+				e.render(observableList);
 		}
 		for(Iterator<Upgrade> itor=upgrades.iterator();itor.hasNext(); )
 		{
-			observableList.add(itor.next().getCircle());
+			itor.next().render(observableList);;
 		}
 	}
 	//bind progress bar

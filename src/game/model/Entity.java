@@ -3,13 +3,15 @@ package game.model;
 import game.Main;
 import game.util.Distance;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.shape.Circle;
 
 public abstract class Entity 
 {
 	protected Point p;
 	protected double radius;
-	protected Circle circle;
+	protected CircleDesign circle;
 	protected double xVelocity;
 	protected double yVelocity;
 	public Entity()
@@ -20,14 +22,17 @@ public abstract class Entity
 	{
 		p=new Point(x,y);
 	}
-	public void bindCircle(Circle c)
+	public void bindCircle(CircleDesign c)
 	{
 		circle=c;
 		c.centerXProperty().bind(p.getXProperty());
 		c.centerYProperty().bind(p.getYProperty());
 		c.setRadius(radius);
 	}
-	public Circle getCircle() {return circle;}
+	public void render(ObservableList<Node> observablelist)
+	{
+		circle.render(observablelist);
+	}
 	public void move()
 	{
 		p.setX(p.getX()+xVelocity/Main.FPS);

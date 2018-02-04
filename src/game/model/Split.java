@@ -14,6 +14,6 @@ public class Split extends FixedVelocityEnemy
 		damage=damagePARA;
 		life=HEALTHPARA;
 		setVelocity(direction);
-		bindCircle(CircleFactory.getRepliconeCircle());
+		bindCircle(CircleFactory.getSplit());
 	}
 }

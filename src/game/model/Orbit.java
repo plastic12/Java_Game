@@ -13,6 +13,6 @@ public class Orbit extends Enemy
 		velocity=velocityPARA;
 		damage=damagePARA;
 		life=HEALTHPARA;
-		bindCircle(CircleFactory.getSwinger());
+		bindCircle(CircleFactory.getOrbit());
 	}
 }

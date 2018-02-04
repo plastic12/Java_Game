@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 import game.Main;
 import game.model.Bullet;
+import game.model.CircleDesign;
 import game.model.Enemy;
 import game.model.Level;
 import game.model.Shooter;
@@ -23,6 +24,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -62,7 +66,7 @@ public class GameController
 	public static final double XBOUND=600;
 	public static final double YBOUND=500;
 	//toggle testing constant
-	
+
 	public GameController() {
 	}
 
@@ -88,13 +92,13 @@ public class GameController
 		pausePane=loader.load();
 		PauseController controller=loader.getController();
 		controller.bindGamePane(gamePane);
-		
+
 		//init curtain
 		scenePane=scene;
 		curtain=new Curtain(this);
 		curtain.bind(scene);
 		//bind model and render
-		shooter.bindCircle(shooterRender);
+		shooter.bindCircle(new CircleDesign(shooterRender));
 		shooter.bindHealth(healthBar);
 		shooter.bindPower(powerBar);
 		scoreLabel.textProperty().bind(Bindings.concat("score: ").concat(score.asString()));
@@ -154,28 +158,29 @@ public class GameController
 	public void cleanUp()
 	{
 		gamePane.getChildren().retainAll(bg);
-		gamePane.getChildren().add(shooter.getCircle());
+		shooter.render(gamePane.getChildren());
+
 	}
 	public void pressHandler(KeyEvent e)
 	{
-		if(running)
+
+		switch(e.getCode())
 		{
-			switch(e.getCode())
+		case LEFT:
+			shooter.LEFT=true;
+			break;
+		case RIGHT:
+			shooter.RIGHT=true;
+			break;
+		case DOWN:
+			shooter.DOWN=true;
+			break;
+		case UP:
+			shooter.UP=true;
+			break;
+		case ESCAPE:
+			if(running)
 			{
-			case LEFT:
-				shooter.LEFT=true;
-				break;
-			case RIGHT:
-				shooter.RIGHT=true;
-				break;
-			case DOWN:
-				shooter.DOWN=true;
-				break;
-			case UP:
-				shooter.UP=true;
-				break;
-			case ESCAPE:
-				//System.out.println("pause");
 				if(!pause)
 				{
 					//pause
@@ -190,9 +195,9 @@ public class GameController
 				}
 				pause=!pause;
 				break;
-			default:
-				break;
 			}
+		default:
+			break;
 		}
 	}
 	public void quitGame()
@@ -201,25 +206,22 @@ public class GameController
 	}
 	public void releaseHandler(KeyEvent e)
 	{
-		if(running)
+		switch(e.getCode())
 		{
-			switch(e.getCode())
-			{
-			case LEFT:
-				shooter.LEFT=false;
-				break;
-			case RIGHT:
-				shooter.RIGHT=false;
-				break;
-			case DOWN:
-				shooter.DOWN=false;
-				break;
-			case UP:
-				shooter.UP=false;
-				break;
-			default:
-				break;
-			}
+		case LEFT:
+			shooter.LEFT=false;
+			break;
+		case RIGHT:
+			shooter.RIGHT=false;
+			break;
+		case DOWN:
+			shooter.DOWN=false;
+			break;
+		case UP:
+			shooter.UP=false;
+			break;
+		default:
+			break;
 		}
 	}
 	public void removeBullet(Bullet b)
@@ -238,6 +240,6 @@ public class GameController
 		}
 		this.level.bindProgress(progressBar);
 	}
-	
-	
+
+
 }
