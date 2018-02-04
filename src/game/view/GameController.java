@@ -57,8 +57,7 @@ public class GameController
 	private SimpleIntegerProperty score;
 	private Level level;
 	private int levelNo;
-	//system or counter
-
+	//system
 	private boolean pause=false;
 	private boolean running=true;
 	private Timeline loop;
@@ -70,17 +69,8 @@ public class GameController
 	public GameController() {
 	}
 
-
-	@Override
-	protected void finalize() throws Throwable {
-		// TODO Auto-generated method stub
-		System.out.println("gameController garbage");
-		super.finalize();
-	}
-
 	public void globalPlay() {running=true;loop.play();}
 	public void globalStop() {running=false;loop.pause();}
-	public void healthInc(int increment) {shooter.healthInc(increment);}
 	public void init(Pane scene) throws IOException
 	{
 		//init variable
@@ -92,7 +82,6 @@ public class GameController
 		pausePane=loader.load();
 		PauseController controller=loader.getController();
 		controller.bindGamePane(gamePane);
-
 		//init curtain
 		scenePane=scene;
 		curtain=new Curtain(this);
@@ -117,6 +106,7 @@ public class GameController
 		//main loop and animation
 		EventHandler<ActionEvent> eventHandler = e -> 
 		{
+			//run main loop
 			boolean levelUp=level.loop(score,shooter);
 			//update render
 			cleanUp();
@@ -127,7 +117,6 @@ public class GameController
 					quitGame();
 					Main.gameOver(score.get());
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			if(levelUp)
@@ -138,11 +127,9 @@ public class GameController
 					start(levelNo+1);
 				} else
 					try {
-						//TODO game Win panel, function
 						quitGame();
 						Main.gameWin(score.get());
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 			}
@@ -161,6 +148,7 @@ public class GameController
 		shooter.render(gamePane.getChildren());
 
 	}
+	//press Handler
 	public void pressHandler(KeyEvent e)
 	{
 
@@ -178,6 +166,7 @@ public class GameController
 		case UP:
 			shooter.UP=true;
 			break;
+		// escape to stop game
 		case ESCAPE:
 			if(running)
 			{
@@ -204,6 +193,7 @@ public class GameController
 	{
 		loop.stop();
 	}
+	//releaseHandler
 	public void releaseHandler(KeyEvent e)
 	{
 		switch(e.getCode())
@@ -224,15 +214,13 @@ public class GameController
 			break;
 		}
 	}
-	public void removeBullet(Bullet b)
+	//start level
+	public void start(int levelNo)
 	{
-		gamePane.getChildren().remove(b.getLine());
-	}
-	public void start(int level)
-	{
-		this.level=Level.initLevel(level);
-		levelNo=level;
+		level=Level.initLevel(levelNo);
+		this.levelNo=levelNo;
 		loop.play();
+		//if set curtain will show dialog
 		if(Main.curtain)
 		{
 			curtain.setText(this.level.getPrompt());
@@ -240,6 +228,4 @@ public class GameController
 		}
 		this.level.bindProgress(progressBar);
 	}
-
-
 }

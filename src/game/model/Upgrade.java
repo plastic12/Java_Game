@@ -11,22 +11,14 @@ public class Upgrade extends Entity
 	private int timeOutCounter;
 	private final int timeOut=10;
 	//testing constant
-	public static final int progressMul=100;
+	public static final int progressMul=5;
 	private Upgrade(double x,double y)
 	{
 		super(x,y);
 		radius=5;
 		timeOutCounter=0;
 	}
-	public int getPowerUp() {
-		return powerUp;
-	}
-	public int getProgressUp() {
-		return progressUp;
-	}
-	public int getScoreUp() {
-		return scoreUp;
-	}
+	//factory method of upgrade
 	public static Upgrade powerUpgrade(double x,double y)
 	{
 		Upgrade u= new Upgrade(x,y);
@@ -57,6 +49,16 @@ public class Upgrade extends Entity
 		u.bindCircle(CircleFactory.scoreUpgrade());
 		return u;
 	}
+	//getter and setter
+	public int getPowerUp() {
+		return powerUp;
+	}
+	public int getProgressUp() {
+		return progressUp;
+	}
+	public int getScoreUp() {
+		return scoreUp;
+	}
 	private void setPowerUp(int powerUp) {
 		this.powerUp = powerUp;
 	}
@@ -66,5 +68,6 @@ public class Upgrade extends Entity
 	private void setScoreUp(int scoreUp) {
 		this.scoreUp = scoreUp;
 	}
+	//timeout
 	public boolean timeOut() {timeOutCounter++;return(timeOutCounter>=timeOut*Main.FPS);}
 }
