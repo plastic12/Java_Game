@@ -12,7 +12,7 @@
       <Rectangle fx:id="layer" arcHeight="5.0" arcWidth="5.0" height="253.0" opacity="0.25" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="321.0" />
       <Label fx:id="pauseLabel" text="Pause" textFill="WHITE">
          <font>
-            <Font size="24.0" />
+            <Font name="Agency FB" size="24.0" />
          </font></Label>
    </children>
 </AnchorPane>
