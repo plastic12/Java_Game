@@ -115,8 +115,7 @@ public class GameController
 		{
 			boolean levelUp=level.loop(score,shooter);
 			//update render
-			gamePane.getChildren().retainAll(bg);
-			gamePane.getChildren().add(shooter.getCircle());
+			cleanUp();
 			level.render(gamePane.getChildren());
 			//check dead and level up
 			if(isDead())
@@ -129,8 +128,7 @@ public class GameController
 				}
 			if(levelUp)
 			{
-				gamePane.getChildren().retainAll(bg);
-				gamePane.getChildren().add(shooter.getCircle());
+				cleanUp();
 				if(levelNo!=6)
 				{
 					start(levelNo+1);
@@ -155,7 +153,8 @@ public class GameController
 	}
 	public void cleanUp()
 	{
-		level.cleanUp(gamePane.getChildren());
+		gamePane.getChildren().retainAll(bg);
+		gamePane.getChildren().add(shooter.getCircle());
 	}
 	public void pressHandler(KeyEvent e)
 	{

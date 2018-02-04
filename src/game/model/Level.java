@@ -14,6 +14,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Level 
 {
+	//instance variable
 	protected Color color;
 	protected String prompt;
 	private int enemyCounter=0;
@@ -23,12 +24,13 @@ public class Level
 	private LinkedList<Enemy> enemies;
 	private LinkedList<Upgrade> upgrades;
 	protected int[] enemyRate;
-	public static final int LEVELCOUNT=8;
+	//constant
 	public static final int enemyfreq=1;
 	public static final int collisionCheckfreq=50;
 	public static final int powerUprate=20;
 	public static final int scoreUprate=20;
 	public static final int progressUprate=20;
+	//level setup
 	private static int[][] levelsetup= {
 			{50,50,50,50,50,50,50},
 			{30,60,60,60,60,60,60},
@@ -55,6 +57,7 @@ public class Level
 			Color.INDIGO,
 			Color.web("#8B00FF")
 	};
+	//factory method generate level
 	public static Level initLevel(int level)
 	{
 		if(level<7)
@@ -62,9 +65,10 @@ public class Level
 		else if(level==7)
 			return new BossLevel();
 		else
-			//TODO
+			//other level add later
 			return null;
 	}
+	//gen enemy according to dice and levelsetup
 	public void addEnemy(Shooter shooter)
 	{
 		double dice=Math.random()*100;
@@ -88,6 +92,7 @@ public class Level
 			enemies.add(e);
 		}
 	}
+	//generate level according to levelsetup
 	protected Level(int level)
 	{
 		this();
@@ -95,6 +100,7 @@ public class Level
 		prompt=levelPrompt[level];
 		enemyRate=levelsetup[level];
 	}
+	//base constructor
 	protected Level()
 	{
 		progress=new SimpleIntegerProperty(0);
@@ -102,13 +108,13 @@ public class Level
 		enemies=new LinkedList<Enemy>();
 		upgrades=new LinkedList<Upgrade>();
 	}
+	//render bullet enemy upgrade
 	public void render(ObservableList<Node> observableList)
 	{
 		for(Iterator<Bullet> itor=bullets.iterator();itor.hasNext();)
 		{
 			observableList.add(itor.next().getLine());
 		}
-		//remove Enemy
 		for(Iterator<Enemy> itor=enemies.iterator();itor.hasNext();)
 		{
 			Enemy e=itor.next();
@@ -122,11 +128,13 @@ public class Level
 			observableList.add(itor.next().getCircle());
 		}
 	}
+	//bind progress bar
 	public void bindProgress(Rectangle progressBar)
 	{
 		progressBar.widthProperty().bind(progress);
 		progressBar.setFill(color);
 	}
+	//gen appropriate upgrade according to dice
 	public void genUpgrade(double x,double y)
 	{
 		double dice=100*Math.random();
@@ -146,6 +154,7 @@ public class Level
 			upgrades.add(u);
 		}
 	}
+	
 	public void collisionPhase(SimpleIntegerProperty score, Shooter shooter)
 	{
 		collCheckCounter++;
@@ -206,6 +215,7 @@ public class Level
 			collCheckCounter=0;
 		}
 	}
+	//main loop for a level
 	public boolean loop(SimpleIntegerProperty score, Shooter shooter)
 	{
 		genEnemy(shooter);
@@ -214,9 +224,10 @@ public class Level
 		movePhase(shooter);
 		removeOutBound();
 		upgradeTimeout();
-		
+		//return if levelup
 		return(progress.get()>=100);
 	}
+	//upgrade disappear after a period of time
 	public void upgradeTimeout()
 	{
 		for(Iterator<Upgrade> itor=upgrades.iterator();itor.hasNext();)
@@ -228,6 +239,7 @@ public class Level
 			}
 		}
 	}
+	//remove enemy and bullet out of bound
 	public void removeOutBound()
 	{
 		//remove Bullet
@@ -237,7 +249,6 @@ public class Level
 			if(!b.inBound())
 			{
 				itor.remove();
-				//System.out.println("removed");
 			}
 		}
 		//remove Enemy
@@ -250,6 +261,7 @@ public class Level
 			}
 		}
 	}
+	//move enemy bullet shooter
 	public void movePhase(Shooter shooter)
 	{
 		//move enemy
@@ -268,6 +280,7 @@ public class Level
 		shooter.accelerate();
 		shooter.move();
 	}
+	//generate enemy according to counter
 	public void genEnemy(Shooter shooter)
 	{
 		enemyCounter++;
@@ -277,34 +290,13 @@ public class Level
 			enemyCounter=0;
 		}
 	}
+	//generate bullet
 	public void genBullet(Shooter shooter)
 	{
 		Bullet b=shooter.shoot();
 		if(b!=null)
 		{
 			bullets.add(b);
-		}
-	}
-	public void cleanUp(ObservableList<Node> observableList)
-	{
-		for(Iterator<Bullet> itor=bullets.iterator();itor.hasNext();)
-		{
-			Bullet b=itor.next();
-			observableList.remove(b.getLine());
-			itor.remove();
-		}
-		//remove Enemy
-		for(Iterator<Enemy> itor=enemies.iterator();itor.hasNext();)
-		{
-			Enemy b=itor.next();
-			observableList.remove(b.getCircle());
-			itor.remove();
-		}
-		for(Iterator<Upgrade> itor=upgrades.iterator();itor.hasNext(); )
-		{
-			Upgrade u=itor.next();
-			observableList.remove(u.getCircle());
-			itor.remove();
 		}
 	}
 	public String getPrompt() {return prompt;}
