@@ -164,13 +164,19 @@ public class Level
 			for(Iterator<Bullet> itor=bullets.iterator();itor.hasNext();)
 			{
 				Bullet b=itor.next();
-
 				for(ListIterator<Enemy> itor2=enemies.listIterator();itor2.hasNext();)
 				{
 					Enemy e=itor2.next();
 					if(e.getShot(b))
 					{
-						itor.remove();
+						try
+						{
+							itor.remove();
+						}
+						catch(IllegalStateException e1)
+						{
+							
+						}
 						if(e.isDead())
 						{
 							e.dead();
@@ -180,9 +186,9 @@ public class Level
 								for(int i=0;i<4;i++)
 									itor2.add(new Split(e.getX(),e.getY(),i));
 							}
+							//gen upgrade
 							if(!(e instanceof Split))
 								genUpgrade(e.getX(),e.getY());
-							//chance add upgrade
 						}
 					}
 				}

@@ -16,11 +16,11 @@
                   <Image url="@background.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="145.0" layoutY="130.0" prefHeight="79.0" prefWidth="332.0" text="Game Over">
+            <Label alignment="CENTER" layoutX="132.0" layoutY="130.0" text="Game Over">
                <font>
                   <Font name="Agency FB" size="64.0" />
                </font></Label>
-             <Label alignment="CENTER" layoutX="227.0" layoutY="229.0" prefHeight="29.0" prefWidth="76.0" text="Score:">
+             <Label alignment="CENTER" layoutX="205.0" layoutY="229.0" prefHeight="29.0" text="Score:">
                <font>
                   <Font name="Agency FB" size="36.0" />
                </font>
@@ -30,12 +30,12 @@
                   <Font name="Agency FB" size="36.0" />
                </font>
             </Label>
-            <Label fx:id="restart" alignment="CENTER" layoutX="260.0" layoutY="336.0" onMouseClicked="#restart" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Restart">
+            <Label fx:id="restart" alignment="CENTER" layoutX="240.0" layoutY="336.0" onMouseClicked="#restart" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Restart">
                <font>
                   <Font name="Agency FB" size="36.0" />
                </font>
             </Label>
-            <Label fx:id="home" alignment="CENTER" layoutX="235.0" layoutY="394.0" onMouseClicked="#menu" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Back to menu">
+            <Label fx:id="home" alignment="CENTER" layoutX="185.0" layoutY="394.0" onMouseClicked="#menu" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Back to menu">
                <font>
                   <Font name="Agency FB" size="36.0" />
                </font>

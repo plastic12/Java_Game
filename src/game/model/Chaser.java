@@ -1,5 +1,6 @@
 package game.model;
 
+//chaser type, base class for enemy chase player
 public abstract class Chaser extends Enemy 
 {
 	protected Shooter shooter;

@@ -18,14 +18,30 @@
                   <Image url="@background.png" />
                </image>
             </ImageView>
-            <Label fx:id="startBtn" alignment="CENTER" layoutX="269.0" layoutY="288.0" onMouseClicked="#startGame" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Start">
-               <font>
-                  <Font name="Agency FB" size="40.0" />
-               </font></Label>
-            <Label fx:id="Leaderboard" alignment="CENTER" layoutX="180.0" layoutY="412.0" onMouseClicked="#goLeaderboard" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" prefHeight="14.0" prefWidth="243.0" text="Leaderboard">
-               <font>
-                  <Font name="Agency FB" size="40.0" />
-               </font></Label>
+            <VBox alignment="CENTER" layoutX="180.0" layoutY="257.0" spacing="10.0">
+               <children>
+                  <Label fx:id="startBtn" alignment="CENTER" layoutX="269.0" layoutY="288.0" onMouseClicked="#startGame" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Start">
+                     <font>
+                        <Font name="Agency FB" size="40.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="261.0" layoutY="348.0" onMouseClicked="#goOption" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Option">
+                     <font>
+                        <Font name="Agency FB" size="40.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Leaderboard" alignment="CENTER" layoutX="180.0" layoutY="412.0" onMouseClicked="#goLeaderboard" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" prefHeight="14.0" prefWidth="243.0" text="Leaderboard">
+                     <font>
+                        <Font name="Agency FB" size="40.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="276.0" layoutY="470.0" onMouseClicked="#exitBtn" onMouseExited="#mouseOut" onMouseMoved="#mouseIn" text="Quit">
+                     <font>
+                        <Font name="Agency FB" size="40.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
             <Label fx:id="GameName" alignment="CENTER" layoutX="62.0" layoutY="76.0" prefHeight="181.0" prefWidth="478.0" text="Shoot" textAlignment="CENTER">
                <font>
                   <Font name="Agency FB" size="100.0" />
@@ -38,16 +54,6 @@
                      </stops>
                   </LinearGradient>
                </textFill>
-            </Label>
-            <Label alignment="CENTER" layoutX="261.0" layoutY="348.0" onMouseClicked="#goOption" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Option">
-               <font>
-                  <Font name="Agency FB" size="40.0" />
-               </font>
-            </Label>
-            <Label layoutX="276.0" layoutY="470.0" onMouseClicked="#exitBtn" onMouseExited="#mouseOut" onMouseMoved="#mouseIn" text="Quit">
-               <font>
-                  <Font name="Agency FB" size="40.0" />
-               </font>
             </Label>
          </children>
       </Pane>

@@ -14,12 +14,12 @@
             <Image url="@background.png" />
          </image>
       </ImageView>
-      <Label layoutX="36.0" layoutY="90.0" text="Congratulations!&#10;You have finished the game" wrapText="true">
+      <Label layoutX="6.0" layoutY="91.0" text="Congratulations!&#10;You have finished the game" wrapText="true">
          <font>
-            <Font name="Agency FB" size="50.0" />
+            <Font size="45.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="237.0" layoutY="239.0" prefHeight="29.0" prefWidth="76.0" text="Score:">
+      <Label alignment="CENTER" layoutX="227.0" layoutY="239.0" text="Score:">
          <font>
             <Font name="Agency FB" size="30.0" />
          </font>
@@ -29,17 +29,17 @@
             <Font name="Agency FB" size="30.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="254.0" layoutY="371.0" onMouseClicked="#restart" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Restart">
+      <Label alignment="CENTER" layoutX="233.0" layoutY="372.0" onMouseClicked="#restart" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Restart">
          <font>
             <Font name="Agency FB" size="40.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="216.0" layoutY="436.0" onMouseClicked="#menu" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Back to menu">
+      <Label alignment="CENTER" layoutX="172.0" layoutY="435.0" onMouseClicked="#menu" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Back to menu">
          <font>
             <Font name="Agency FB" size="40.0" />
          </font>
       </Label>
-      <Label fx:id="noteLabel" layoutX="163.0" layoutY="290.0" text="You have unlock the color option,&#10;Check option in menu." textFill="#ee0000" visible="false">
+      <Label fx:id="noteLabel" layoutX="64.0" layoutY="288.0" text="You have unlock the color option,&#10;Check option in menu." textFill="#ee0000">
          <font>
             <Font name="Agency FB" size="30.0" />
          </font>

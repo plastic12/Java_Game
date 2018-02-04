@@ -10,6 +10,7 @@ import javafx.scene.shape.Arc;
 import javafx.scene.shape.Circle;
 import javafx.scene.transform.Rotate;
 
+//enemy render design
 public class CircleDesign 
 {
 	private Circle circle;
@@ -18,13 +19,15 @@ public class CircleDesign
 	
 	public CircleDesign(Circle circle)
 	{
+		//init variable
 		this.circle=circle;
 		components=new ArrayList<Node>();
+		//set rotation
 		rotation=new Rotate();
         rotation.pivotXProperty().bind(circle.centerXProperty());
         rotation.pivotYProperty().bind(circle.centerYProperty());
 	}
-	//add Node after bind all the attribute to circle
+	//add node and set rotation
 	public void add(Node node)
 	{
 		components.add(node);

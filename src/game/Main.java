@@ -49,9 +49,9 @@ public class Main extends Application{
 		//read config
 		readConfig();
 		try {
+			//show menu
 			this.primaryStage = primaryStage;
 			menu();
-					
 			primaryStage.setTitle("game");			
 			primaryStage.setResizable(false);
 			primaryStage.show();
@@ -64,16 +64,16 @@ public class Main extends Application{
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
+	//menu scene
 	public static void menu() throws IOException {
 		FXMLLoader loader1 = new FXMLLoader();
 		loader1.setLocation(Main.class.getResource("view/Start.fxml"));	
 		Pane startPane = (Pane) loader1.load();
-
 		Scene StartScene = new Scene(startPane);
 		bgm.menu();
 		primaryStage.setScene(StartScene);
 	}
+	//option scene
 	public static void option() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("view/Option.fxml"));
@@ -82,26 +82,20 @@ public class Main extends Application{
 		Scene scene = new Scene(pane);
 		primaryStage.setScene(scene);
 	}
-	
+	//game scene
 	public static void startGame() throws IOException {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("view/Game.fxml"));
 			StackPane gamePane =(StackPane) loader.load();
 			GameController gameController=loader.getController();
-			
-			gameController.init(gamePane);
 			Scene scene=new Scene(gamePane);
-			//add event handler
-			scene.addEventHandler(KeyEvent.KEY_PRESSED, e->{
-				gameController.pressHandler(e);
-			});
-			scene.addEventHandler(KeyEvent.KEY_RELEASED, e->{
-				gameController.releaseHandler(e);
-			});
 			primaryStage.setScene(scene);
-			gameController.start(0);
+			gameController.init(gamePane);
+			//start game in level 1
+			gameController.start(6);
 			bgm.game();
 		}
+	//gameOver scene
 	public static void gameOver(int score) throws IOException
 	{
 		bgm.gameOver();
@@ -114,9 +108,9 @@ public class Main extends Application{
 		Scene scene = new Scene(pane);
 		primaryStage.setScene(scene);
 	}
+	//gameWin scene
 	public static void gameWin(int score) throws IOException
 	{
-		//TODO gameWin
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("view/GameWin.fxml"));
 		Pane pane = (Pane) loader.load();
@@ -126,19 +120,18 @@ public class Main extends Application{
 		Scene scene = new Scene(pane);
 		primaryStage.setScene(scene);
 	}
-	
+	//leaderboard scene
 	public static void viewLeaderboard() throws IOException {
 		FXMLLoader loader1 = new FXMLLoader();
 		loader1.setLocation(Main.class.getResource("view/Leaderboard.fxml"));			
 		Pane leader = (Pane) loader1.load();
-
 		Scene leaderScene = new Scene(leader);
 		primaryStage.setScene(leaderScene);
 	}
+	//read config
 	public static void readConfig()
 	{
-		//System.out.println(Main.class.getResource("resource/config.txt")==null);
-		
+		//if can't find file
 		if((Main.class.getResource("resource/config.txt")==null))
 		{
 			try {
@@ -146,17 +139,14 @@ public class Main extends Application{
 				configPath=Paths.get(link.toURI());
 				writeConfig();
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (URISyntaxException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		try {
 			configPath=Paths.get(Main.class.getResource("resource/config.txt").toURI());
 		} catch (URISyntaxException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		ArrayList<String> fileArray=null;

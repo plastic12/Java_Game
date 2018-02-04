@@ -68,7 +68,7 @@ public class GameController
 
 	public GameController() {
 	}
-
+	
 	public void globalPlay() {running=true;loop.play();}
 	public void globalStop() {running=false;loop.pause();}
 	public void init(Pane scene) throws IOException
@@ -137,6 +137,13 @@ public class GameController
 		loop = new Timeline(
 				new KeyFrame(Duration.millis(1000/Main.FPS), eventHandler));
 		loop.setCycleCount(Timeline.INDEFINITE);
+		//add event handler
+		gamePane.getScene().addEventHandler(KeyEvent.KEY_PRESSED, e->{
+			pressHandler(e);
+		});
+		gamePane.getScene().addEventHandler(KeyEvent.KEY_RELEASED, e->{
+			releaseHandler(e);
+		});
 	}
 	public boolean isDead()
 	{

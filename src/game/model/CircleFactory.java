@@ -9,7 +9,6 @@ import javafx.scene.shape.Circle;
 public final class CircleFactory 
 {
 	//this is a class to generate circle, all the function should be static.
-	//TODO
 	public static CircleDesign powerUpgrade()
 	{
 		Circle c=new Circle();
@@ -63,7 +62,7 @@ public final class CircleFactory
 			fill=Color.YELLOW;
 		Circle c=new Circle();
 		c.setFill(Color.WHITE);
-
+		//add four chord
 		Arc arc1 = new Arc(c.getCenterX(), c.getCenterY(), c.getRadius(), c.getRadius(), 315.0f, 90.0f);
 		arc1.setFill(fill);
 		arc1.centerXProperty().bind(c.centerXProperty());
@@ -110,6 +109,7 @@ public final class CircleFactory
 		if(Main.color)
 			c.setFill(Color.GREEN);
 		Circle cInner=new Circle();
+		//add inner circle
 		cInner.setFill(Color.WHITE);
 		cInner.centerXProperty().bind(c.centerXProperty());
 		cInner.centerYProperty().bind(c.centerYProperty());
@@ -126,7 +126,7 @@ public final class CircleFactory
 		Circle c=new Circle();
 		c.setFill(Color.WHITE);
 		c.setStroke(fill);
-
+		//add four round arc
 		Arc arc1 = new Arc(c.getCenterX(), c.getCenterY(), c.getRadius(), c.getRadius(), 337.5f, 45.0f);
 		arc1.setFill(fill);
 		arc1.centerXProperty().bind(c.centerXProperty());
@@ -175,7 +175,7 @@ public final class CircleFactory
 		Circle c=new Circle();
 		c.setFill(Color.WHITE);
 		c.setStroke(fill);
-
+		//add two round arc
 		Arc arc1 = new Arc(c.getCenterX(), c.getCenterY(), c.getRadius(), c.getRadius(), 315.5f, 90.0f);
 		arc1.setFill(fill);
 		arc1.centerXProperty().bind(c.centerXProperty());
@@ -207,7 +207,9 @@ public final class CircleFactory
 	public static CircleDesign getGhost()
 	{
 		Circle c=new Circle();
-		c.setFill(Color.web("#8B00FF"));
+		c.setFill(Color.BLACK);
+		if(Main.color)
+			c.setFill(Color.web("#8B00FF"));
 		return new CircleDesign(c);
 	}
 }

@@ -17,11 +17,11 @@
                   <Image url="@background.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="176.0" layoutY="32.0" prefHeight="79.0" prefWidth="275.0" text="High Score">
+            <Label alignment="CENTER" layoutX="164.0" layoutY="31.0" prefHeight="79.0" prefWidth="275.0" text="High Score">
                <font>
                   <Font name="Agency FB" size="50.0" />
                </font></Label>
-            <Label fx:id="menu" layoutX="393.0" layoutY="471.0" onMouseClicked="#backMenu" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Back to menu">
+            <Label fx:id="menu" layoutX="340.0" layoutY="471.0" onMouseClicked="#backMenu" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" text="Back to menu">
                <font>
                   <Font name="Agency FB" size="40.0" />
                </font>

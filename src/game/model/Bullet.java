@@ -8,11 +8,14 @@ import javafx.scene.shape.Line;
 
 public class Bullet 
 {
+	//instance variable
 	private Line render;
 	private int damage;
 	private Point p1;
 	private Point p2;
+	//affine matrix for the bullet
 	private double[][] affineM;
+	//constant
 	public static final double velocity=100;
 	public static final double length=10;
 	
@@ -34,11 +37,10 @@ public class Bullet
 		this.damage=damage;
 	}
 	public int getDamage() {return damage;}
+	//affine transform set point1 to 0,0 point 2 to length,0 then calculate the distance
 	public double getDistance(Entity e)
 	{
-		affineM=MatrixHelper.getAffineTransformation(p1.getX(), p1.getY(), p2.getX(), p2.getY());
 		double[] coord=MatrixHelper.twoDAffineTransform(affineM, e.getX(), e.getY());
-		//System.out.println(coord[0]+" "+coord[1]+" "+coord[2]);
 		return (coord[0]<0||coord[0]>length) ? (Math.min(Distance.getDistance(0, 0, coord[0], coord[1]), Distance.getDistance(0, length, coord[0], coord[1]))):Math.abs(coord[1]);
 	}
 	public Line getLine()
@@ -53,6 +55,7 @@ public class Bullet
 		p2.setX(p2.getX()+deltaX);
 		p1.setY(p1.getY()+deltaY);
 		p2.setY(p2.getY()+deltaY);
+		affineM=MatrixHelper.getAffineTransformation(p1.getX(), p1.getY(), p2.getX(), p2.getY());
 	}
 	public boolean inBound()
 	{
