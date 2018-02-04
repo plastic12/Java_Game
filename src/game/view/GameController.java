@@ -129,7 +129,8 @@ public class GameController
 				}
 			if(levelUp)
 			{
-				cleanUp();
+				gamePane.getChildren().retainAll(bg);
+				gamePane.getChildren().add(shooter.getCircle());
 				if(levelNo!=6)
 				{
 					start(levelNo+1);

@@ -65,10 +65,6 @@ public class Level
 			//TODO
 			return null;
 	}
-	public void setupEnemy(int level)
-	{
-
-	}
 	public void addEnemy(Shooter shooter)
 	{
 		double dice=Math.random()*100;
@@ -216,8 +212,9 @@ public class Level
 		genBullet(shooter);
 		collisionPhase(score,shooter);
 		movePhase(shooter);
-		//removeOutBound(observableList);
+		removeOutBound();
 		upgradeTimeout();
+		
 		return(progress.get()>=100);
 	}
 	public void upgradeTimeout()
@@ -231,7 +228,7 @@ public class Level
 			}
 		}
 	}
-	public void removeOutBound(ObservableList<Node> observableList)
+	public void removeOutBound()
 	{
 		//remove Bullet
 		for(Iterator<Bullet> itor=bullets.iterator();itor.hasNext();)
@@ -239,7 +236,6 @@ public class Level
 			Bullet b=itor.next();
 			if(!b.inBound())
 			{
-				observableList.remove(b.getLine());
 				itor.remove();
 				//System.out.println("removed");
 			}
@@ -250,7 +246,6 @@ public class Level
 			Enemy b=itor.next();
 			if(!b.inBound())
 			{
-				observableList.remove(b.getCircle());
 				itor.remove();
 			}
 		}
