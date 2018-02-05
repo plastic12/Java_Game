@@ -92,7 +92,7 @@ public class Main extends Application{
 			primaryStage.setScene(scene);
 			gameController.init(gamePane);
 			//start game in level 1
-			gameController.start(6);
+			gameController.start(0);
 			bgm.game();
 		}
 	//gameOver scene

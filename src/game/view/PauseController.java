@@ -18,7 +18,6 @@ public class PauseController
 		layer.widthProperty().bind(gamePane.widthProperty());
 		layer.heightProperty().bind(gamePane.heightProperty());
 		pauseLabel.translateXProperty().bind((gamePane.widthProperty().add(pauseLabel.widthProperty().negate())).divide(2));
-		System.out.println(pauseLabel.getTranslateX());
 		pauseLabel.translateYProperty().bind((gamePane.heightProperty().add(pauseLabel.heightProperty().negate())).divide(2));
 	}
 }

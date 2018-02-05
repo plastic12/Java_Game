@@ -97,7 +97,6 @@ public class GameController
 
 			@Override
 			public void handle(MouseEvent event) {
-				// TODO Auto-generated method stub
 				shooter.setMouseX(event.getX());
 				shooter.setMouseY(event.getY());
 			}
