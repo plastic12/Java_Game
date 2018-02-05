@@ -2,3 +2,4 @@
 *.class
 src/game/TestMain.java
 bin/score.txt
+.DS_Store
