@@ -10,6 +10,7 @@ import static java.nio.file.StandardOpenOption.CREATE;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -132,22 +133,10 @@ public class Main extends Application{
 	public static void readConfig()
 	{
 		//if can't find file
-		if((Main.class.getResource("resource/config.txt")==null))
+		configPath=Paths.get("config.txt");
+		if(!Files.exists(configPath))
 		{
-			try {
-				URL link=new URL(Main.class.getResource("resource/")+"config.txt");
-				configPath=Paths.get(link.toURI());
 				writeConfig();
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			} catch (URISyntaxException e) {
-				e.printStackTrace();
-			}
-		}
-		try {
-			configPath=Paths.get(Main.class.getResource("resource/config.txt").toURI());
-		} catch (URISyntaxException e1) {
-			e1.printStackTrace();
 		}
 		ArrayList<String> fileArray=null;
 		try {

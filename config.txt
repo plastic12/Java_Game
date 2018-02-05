@@ -1,0 +1,4 @@
+music=true
+curtain=true
+win=false
+color=false

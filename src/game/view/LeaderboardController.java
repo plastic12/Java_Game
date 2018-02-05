@@ -35,8 +35,7 @@ public class LeaderboardController implements Initializable{
     }
 
 public LeaderboardController() {
-	URL location = LeaderboardController.class.getProtectionDomain().getCodeSource().getLocation();
-	scoreSource = new File(location.getFile() + "score.txt");
+	scoreSource = new File("score.txt");
 	if (!scoreSource.exists())
 		try {
 			scoreSource.createNewFile();
