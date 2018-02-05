@@ -179,7 +179,6 @@ public class Level
 						}
 						if(e.isDead())
 						{
-							e.dead();
 							itor2.remove();
 							if(e instanceof Replicone)
 							{
@@ -201,7 +200,6 @@ public class Level
 				{
 					shooter.healthInc(-e.getDamage());
 					e.setDead();
-					e.dead();
 					genUpgrade(e.getX(),e.getY());
 					itor2.remove();
 				}

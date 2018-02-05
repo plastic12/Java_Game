@@ -4,14 +4,17 @@ import game.Main;
 import game.view.GameController;
 import javafx.scene.shape.Circle;
 
+//enemy base class
 public abstract class Enemy extends Entity {
 	protected int life;
 	protected int damage;
 	protected double velocity;
+	//base constructor
 	public Enemy() 
 	{
 		
 	}
+	//random set position
 	protected int setPos()
 	{
 		int direction = (int) (Math.random()*4);
@@ -39,28 +42,21 @@ public abstract class Enemy extends Entity {
 		}
 		return direction;
 	}
+	// init position
 	public Enemy(double x, double y)
 	{
 		super(x, y);
 	}
-	public void dead()
-	{
-		if(isDead())
-		{
-			postDeadAction();
-		}
-	}
+	//check dead
 	public void setDead()
 	{
 		life=0;
 	}
-	protected void postDeadAction()
-	{
-		
-	}
+	//damage getter
 	public int getDamage() {
 		return damage;
 	}
+	//check getShot
 	public boolean getShot(Bullet b) 
 	{
 		double distance=b.getDistance(this);
@@ -72,7 +68,9 @@ public abstract class Enemy extends Entity {
 		}
 		return false;
 	}
+	//check dead
 	public boolean isDead() {return (life<=0);}
+	//check inbound
 	public boolean inBound()
 	{
 		return p.getX()>0&&p.getX()<GameController.XBOUND&&p.getY()>0&&p.getY()<GameController.YBOUND;
