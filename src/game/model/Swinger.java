@@ -4,6 +4,7 @@ import game.Main;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 
+//enemy with two orbit surrounding
 public class Swinger extends FixedVelocityEnemy
 {
 	private static double INIT_R=10;
@@ -29,14 +30,15 @@ public class Swinger extends FixedVelocityEnemy
 		updateOrbit();
 	}
 	@Override
+	//move itself and then rotate itself and orbit
 	public void move()
 	{
 		super.move();
 		angle+=angularV/Main.FPS;
 		updateOrbit();
 		circle.setRotate(-angle);
-
 	}
+	//update orbit place
 	private void updateOrbit()
 	{
 		if(s1!=null)
@@ -50,6 +52,7 @@ public class Swinger extends FixedVelocityEnemy
 			s2.p.setX(getX()+(getR()+s2.getR())*Math.cos(Math.PI*(angle+180)/180));
 		}
 	}
+	//swinger damage is calculate as its damage and the sum of remaining orbit damage
 	@Override
 	public int getDamage()
 	{
@@ -61,6 +64,7 @@ public class Swinger extends FixedVelocityEnemy
 		System.out.println(damage+increment);
 		return damage+increment;
 	}
+	//swinger will first destroy its orbit when get shot, then take damage if no orbit remaining
 	@Override
 	public boolean getShot(Bullet b)
 	{
@@ -93,6 +97,7 @@ public class Swinger extends FixedVelocityEnemy
 		}
 		return false;
 	}
+	//render its orbit and then itself
 	public void render(ObservableList<Node> observableList)
 	{
 		

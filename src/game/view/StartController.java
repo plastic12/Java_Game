@@ -26,15 +26,18 @@ public class StartController {
     private Pane StartPane;
 
     @FXML
+    //start game
     public void startGame(MouseEvent event) throws IOException {
     	Main.startGame();
     }
     
    @FXML
+   //leaderboard
     public void goLeaderboard(MouseEvent e) throws IOException {
     	Main.viewLeaderboard();
     }
    @FXML
+   //option panel
    public void goOption(MouseEvent e)throws IOException{
 	   Main.option();
    }
@@ -51,6 +54,7 @@ public class StartController {
     	temp.setEffect(null);
     }
     @FXML
+    //exit button
     public void exitBtn(MouseEvent e)
     {
     		Platform.exit();

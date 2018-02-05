@@ -2,6 +2,7 @@ package game.util;
 
 public final class MatrixHelper 
 {
+	//get 2 by 2 affine matrix which set point 1 to (0,0), point 2 to (length,0)
 	public static double[][] getAffineTransformation(double x1,double y1,double x2,double y2)
 	{
 		double distance=Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
@@ -20,6 +21,7 @@ public final class MatrixHelper
 		affineM[2][2]=1;
 		return affineM;
 	}
+	// perform affine transform, in fact just matrix multiplication
 	public static double[] twoDAffineTransform(double[][] affineM,double x,double y)
 	{
 		double[] output=new double[3];

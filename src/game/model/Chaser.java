@@ -9,6 +9,7 @@ public abstract class Chaser extends Enemy
 		this.shooter=shooter;
 		setPos();
 	}
+	//override move to track shooter
 	@Override
 	public void move()
 	{

@@ -12,6 +12,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
+
+//level class
+//setup the level, also setup the loop of the game
 public class Level 
 {
 	//instance variable
@@ -40,7 +43,7 @@ public class Level
 			{10,20,40,50,60,100,100},
 			{5,15,20,40,60,80,100}};
 	private static String[] levelPrompt= {
-			"Welcome!\n Here is the world of black and white",
+			"level: 1",
 			"level: 2",
 			"level: 3",
 			"level: 4",
@@ -154,7 +157,7 @@ public class Level
 			upgrades.add(u);
 		}
 	}
-	
+	//check collision
 	public void collisionPhase(SimpleIntegerProperty score, Shooter shooter)
 	{
 		collCheckCounter++;

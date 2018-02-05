@@ -2,17 +2,19 @@ package game.model;
 
 import game.view.GameController;
 
+//base class for enemy with only one direction
 public abstract class FixedVelocityEnemy extends Enemy 
 {
+	//base constructor
 	public FixedVelocityEnemy()
 	{
 		
 	}
+	//init position
 	public FixedVelocityEnemy(double d, double e) {
 		super(d,e);
-		// TODO Auto-generated constructor stub
 	}
-
+	//set velocity base on direction
 	protected void setVelocity(int direction)
 	{
 		switch (direction) {

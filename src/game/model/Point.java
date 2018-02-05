@@ -3,6 +3,7 @@ package game.model;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
+
 public class Point 
 {
 	private SimpleDoubleProperty x;

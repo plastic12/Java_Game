@@ -14,12 +14,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+//curtain class, appear before level start
 public class Curtain 
 {
 	private Rectangle curtain;
 	private Label dialog;
 	private GameController controller;
 	public static final int COUNT=300;
+	//init curtain, also store GameController to prevent garbage collection
 	public Curtain(GameController controller)
 	{
 		this.controller=controller;
@@ -33,6 +35,7 @@ public class Curtain
 		dialog.setLayoutY(0);
 		dialog.setTextFill(Color.WHITE);
 	}
+	//set black rectangle fit the scene
 	public void bind(Pane scene)
 	{
 		curtain.widthProperty().bind(scene.widthProperty());
@@ -42,16 +45,19 @@ public class Curtain
 	{
 		dialog.setText(text);
 	}
+	//add panel
 	private void close(Pane scene)
 	{
 		scene.getChildren().add(curtain);
 		scene.getChildren().add(dialog);
 	}
+	//remove panel
 	private void open(Pane scene)
 	{
 		scene.getChildren().remove(dialog);
 		scene.getChildren().remove(curtain);
 	}
+	// add curtain, wait a moment and then start the game
 	public void start(Pane scene)
 	{
 		controller.globalStop();
@@ -64,6 +70,7 @@ public class Curtain
 		temp.setCycleCount(Timeline.INDEFINITE);
 		temp.play();
 	}
+	// inner class for handle curtain
 	public class CurtainHandler implements EventHandler<ActionEvent>
 	{
 		private int counter=0;
@@ -72,6 +79,7 @@ public class Curtain
 		@Override
 		public void handle(ActionEvent event) {
 			counter++;
+			//change opacity upon time pass
 			curtain.setOpacity(1-(double)counter/COUNT);
 			dialog.setOpacity(1-(double)counter/COUNT);
 			if(counter>COUNT)
@@ -81,6 +89,7 @@ public class Curtain
 				t.pause();
 			}
 		}
+		//bind variable
 		public void setPane(Pane scene) {this.scene=scene;}
 		public void setTimeline(Timeline t) {this.t=t;}
 	}

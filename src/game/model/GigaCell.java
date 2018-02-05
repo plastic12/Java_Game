@@ -1,5 +1,6 @@
 package game.model;
 
+//giga cell.Appeared in level 4
 public class GigaCell extends Chaser
 {
 	private static double INIT_R=15;

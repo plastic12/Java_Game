@@ -1,5 +1,6 @@
 package game.model;
 
+//NC is enemy appear in level 2
 public class NC extends FixedVelocityEnemy
 {
 	private static double INIT_R=7;

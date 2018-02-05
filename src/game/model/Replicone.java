@@ -1,5 +1,7 @@
 package game.model;
 
+
+//replicone cell is enemy that split into 4 cell after dead
 public class Replicone extends FixedVelocityEnemy
 {
 	private static double INIT_R=13;

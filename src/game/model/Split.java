@@ -1,5 +1,6 @@
 package game.model;
 
+//small enemy generate by replicone after dead
 public class Split extends FixedVelocityEnemy
 {
 	private static double INIT_R=5;

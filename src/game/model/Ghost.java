@@ -2,14 +2,18 @@ package game.model;
 
 import game.Main;
 
+//ghost enemy(level 7)
 public class Ghost extends Chaser
 {
+	//base value
 	private static double INIT_R=10;
 	private static int HEALTHPARA=20;
 	private static int damagePARA=10;
 	private static int velocityPARA=20;
+	//invisible control
 	private boolean invisible=false;
 	private int invisibleCount;
+	
 	public Ghost(Shooter shooter)
 	{
 		super(shooter);

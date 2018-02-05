@@ -47,6 +47,7 @@ public class Bullet
 	{
 		return render;
 	}
+	//move bullet according to line direction
 	public void move()
 	{
 		double deltaX=(p2.getX()-p1.getX())/length*velocity/Main.FPS;
@@ -57,6 +58,7 @@ public class Bullet
 		p2.setY(p2.getY()+deltaY);
 		affineM=MatrixHelper.getAffineTransformation(p1.getX(), p1.getY(), p2.getX(), p2.getY());
 	}
+	//check line in the game bound
 	public boolean inBound()
 	{
 		return p1.getX()>0&&p1.getX()<GameController.XBOUND&&p1.getY()>0&&p1.getY()<GameController.YBOUND&&

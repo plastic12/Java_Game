@@ -1,5 +1,6 @@
 package game.model;
 
+//Orbit is the enemy surrounding swinger
 public class Orbit extends Enemy 
 {
 	private static double INIT_R=5;

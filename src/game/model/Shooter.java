@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
+//shooter class, the entity player control
 public class Shooter extends Entity
 {
 	//init value
@@ -43,6 +44,7 @@ public class Shooter extends Entity
 		xVelocity=0;
 		yVelocity=0;
 	}
+	//accelerate if mouse press
 	public void accelerate()
 	{
 		if(RIGHT)
@@ -70,25 +72,22 @@ public class Shooter extends Entity
 		if(yVelocity<-SPEED_LIMIT)
 			yVelocity=-SPEED_LIMIT;
 	}
+	//bind health to health bar in game
 	public void bindHealth(Rectangle healthBar)
 	{
 		healthBar.widthProperty().bind(DoubleExpression.doubleExpression(health).divide(MAX_HEALTH).multiply(100));
 	}
+	//bind power to power bar in game
 	public void bindPower(Rectangle powerBar)
 	{
 		powerBar.widthProperty().bind(power);
 	}
+	//get health
 	public int getHealth()
 	{
 		return health.get();
 	}
-	//TODO
-	public void getHit()
-	{
-		
-	}
-	public double getX() {return p.getX();}
-	public double getY() {return p.getY();}
+	//increase health
 	public void healthInc(int increment)
 	{
 		int newValue=health.get()+increment;
@@ -99,12 +98,14 @@ public class Shooter extends Entity
 	@Override
 	public void move()
 	{
-		if(p.getX()+xVelocity/Main.FPS>GameController.XBOUND||p.getX()+xVelocity/Main.FPS<0)
+		//restrict out bound
+		if(p.getX()+xVelocity/Main.FPS+getR()>GameController.XBOUND||p.getX()+xVelocity/Main.FPS-getR()<0)
 			xVelocity=0;
-		if(p.getY()+yVelocity/Main.FPS>GameController.YBOUND||p.getY()+yVelocity/Main.FPS<0)
+		if(p.getY()+yVelocity/Main.FPS+getR()>GameController.YBOUND||p.getY()+yVelocity/Main.FPS-getR()<0)
 			yVelocity=0;
 		super.move();
 	}
+	//increase power
 	public void powerInc(int increment)
 	{
 		int temp=power.get()+increment;
@@ -115,24 +116,24 @@ public class Shooter extends Entity
 		power.set(temp);
 		return;
 	}
+	//setMouseX in the handler
 	public void setMouseX(double mouseX) {
 		this.mouseX = mouseX;
 	}
 	public void setMouseY(double mouseY) {
 		this.mouseY = mouseY;
 	}
+	//add bullet
 	private Bullet addBullet()
 	{
 		return new Bullet(getX(),getY(),mouseX,mouseY,getDamage());
-		/*
-		bullets.add(b);
-		gamePane.getChildren().add(b.getLine());
-		*/
 	}
+	//get damage of bullet
 	public int getDamage()
 	{
 		return 10+power.get()*10/100;
 	}
+	//shoot bullet according to counter
 	public Bullet shoot()
 	{
 		shootCounter++;

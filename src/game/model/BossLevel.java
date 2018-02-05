@@ -2,6 +2,7 @@ package game.model;
 
 import javafx.scene.paint.Color;
 
+//boss level not be implement in this assignment
 public class BossLevel extends Level
 {
 

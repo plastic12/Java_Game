@@ -41,10 +41,12 @@ public class CircleDesign
 	{
 		return circle;
 	}
+	//set radius
 	public void setRadius(double radius)
 	{
 		circle.setRadius(radius);
 	}
+	//for bind center property in enetity
 	public DoubleProperty centerXProperty()
 	{
 		return circle.centerXProperty();
@@ -53,6 +55,7 @@ public class CircleDesign
 	{
 		return circle.centerYProperty();
 	}
+	//change opacity, used in ghost
 	public void setOpacity(double value)
 	{
 		circle.setOpacity(value);
@@ -61,6 +64,7 @@ public class CircleDesign
 			n.setOpacity(value);
 		}
 	}
+	//render circle and then all components
 	public void render(ObservableList<Node> observablelist)
 	{
 		observablelist.add(circle);

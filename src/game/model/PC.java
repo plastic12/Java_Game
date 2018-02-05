@@ -2,6 +2,7 @@ package game.model;
 
 import javafx.scene.shape.Circle;
 
+//PC is enemy appear in level 1
 public class PC extends FixedVelocityEnemy
 {
 	private static double INIT_R=10;

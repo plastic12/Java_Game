@@ -21,6 +21,7 @@ public class OptionController implements Initializable
 	@FXML
 	CheckBox color;
 	@FXML
+	//back menu, also write config at the time
     void backMenu(MouseEvent event) throws IOException 
 	{
 		Main.music=music.isSelected();
@@ -32,8 +33,10 @@ public class OptionController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
+		//init checkbox
 		music.setSelected(Main.music);
 		dialog.setSelected(Main.curtain);
+		//if win set color checkbox visible
 		if(Main.win)
 		{
 			color.setSelected(Main.color);
