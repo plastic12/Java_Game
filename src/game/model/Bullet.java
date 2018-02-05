@@ -16,7 +16,7 @@ public class Bullet
 	//affine matrix for the bullet
 	private double[][] affineM;
 	//constant
-	public static final double velocity=100;
+	public static final double velocity=150;
 	public static final double length=10;
 	
 	public Bullet()

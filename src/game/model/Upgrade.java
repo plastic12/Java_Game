@@ -11,7 +11,7 @@ public class Upgrade extends Entity
 	private int timeOutCounter;
 	private final int timeOut=10;
 	//testing constant
-	public static final int progressMul=5;
+	public static final int progressMul=10;
 	private Upgrade(double x,double y)
 	{
 		super(x,y);
@@ -23,7 +23,7 @@ public class Upgrade extends Entity
 	{
 		Upgrade u= new Upgrade(x,y);
 		u.setPowerUp(1);
-		u.setProgressUp(1);
+		u.setProgressUp(2);
 		u.setScoreUp(10);
 		//bind circle
 		u.bindCircle(CircleFactory.powerUpgrade());
@@ -43,7 +43,7 @@ public class Upgrade extends Entity
 	{
 		Upgrade u= new Upgrade(x,y);
 		u.setPowerUp(0);
-		u.setProgressUp(1);
+		u.setProgressUp(2);
 		u.setScoreUp(50);
 		//bind circle
 		u.bindCircle(CircleFactory.scoreUpgrade());

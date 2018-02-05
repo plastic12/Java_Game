@@ -28,7 +28,7 @@ public class Level
 	private LinkedList<Upgrade> upgrades;
 	protected int[] enemyRate;
 	//constant
-	public static final int enemyfreq=1;
+	public static final int enemyfreq=2;
 	public static final int collisionCheckfreq=50;
 	public static final int powerUprate=20;
 	public static final int scoreUprate=20;

@@ -34,7 +34,7 @@ public class Shooter extends Entity
 	private double mouseX=0;
 	private double mouseY=0;
 	private int shootCounter=0;
-	public static final double shootfreq=2;
+	public static final double shootfreq=5;
 	public Shooter()
 	{
 		super(INIT_X,INIT_Y);
